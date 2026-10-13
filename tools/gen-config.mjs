@@ -9,6 +9,7 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const outDir = process.argv[2] ? join(root, process.argv[2]) : root;
 const env = { ...process.env };
 
 // tiny .env loader (KEY=VALUE, # comments) - no dependencies
@@ -38,7 +39,7 @@ const out = {
   ...(Object.keys(fb).length ? { firebaseConfig: fb } : {}),
   ...(pick("KAIZEN_ROOM") ? { room: pick("KAIZEN_ROOM") } : {}),
 };
-writeFileSync(join(root, "config.gen.js"),
+writeFileSync(join(outDir, "config.gen.js"),
   "/* Generated at deploy from env - do not commit. */\n" +
   "window.KAIZEN_CFG = Object.assign(window.KAIZEN_CFG || {}, " + JSON.stringify(out) + ");\n");
 console.log("config.gen.js written (" + (out.firebaseConfig ? "firebase configured" : "empty = offline mode") + ")");

@@ -1,6 +1,12 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "buildCommand": "node tools/gen-config.mjs",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "buildCommand": "node tools/build.mjs",
+  "outputDirectory": "public",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }

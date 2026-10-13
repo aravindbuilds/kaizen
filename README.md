@@ -9,8 +9,9 @@ The deployable app lives entirely in this folder — **`webapp/` is the Vercel R
 2. Vercel → Add New Project → import repo, then set:
    - **Root Directory:** `webapp`
    - **Framework Preset:** Other
-   - **Build Command:** `node tools/gen-config.mjs`
-   - **Output Directory:** *(leave empty — the folder itself is served)*
+   - **Build Command:** `node tools/build.mjs`
+   - **Output Directory:** `public`
+   (The build stages the site into `public/` and generates the config there — this is what fixes "No Output Directory named public".)
 3. **Environment Variables** (Project → Settings): `FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_DATABASE_URL`, `FIREBASE_PROJECT_ID`, `FIREBASE_STORAGE_BUCKET`, `FIREBASE_MESSAGING_SENDER_ID`, `FIREBASE_APP_ID` (+ optional `FIREBASE_MEASUREMENT_ID`, `KAIZEN_ROOM`).
 4. Deploy. The build injects the config; secrets never touch git.
 

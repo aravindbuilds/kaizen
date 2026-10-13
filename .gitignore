@@ -1,3 +1,4 @@
 # generated at deploy time from env — never commit
 config.gen.js
+public/
 .env
