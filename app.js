@@ -11,7 +11,7 @@ window.addEventListener("error", e => {
     window.__errT = setTimeout(() => t.classList.add("hidden"), 12000); }
 });
 const $ = s => document.querySelector(s);
-const LS_MAIN = "kaizen_v2", LS_DUO = "kaizen_duo", LS_SEEN = "kaizen_feedseen";
+const LS_MAIN = "kaizen_v2", LS_DUO = "kaizen_duo", LS_SEEN = "kaizen_feedseen", LS_AUTH_RETURN = "kaizen_auth_return";
 const store = {
   load(k){ try{ return JSON.parse(localStorage.getItem(k)) || null }catch{ return null } },
   save(k,v){ localStorage.setItem(k, JSON.stringify(v)) }
@@ -831,10 +831,20 @@ async function signIn(){
     if(mode==="none"||mode===null)
       $("#duoStatus").textContent="Note: this browser blocks storage — sign-in will last this tab only. Prefer Safari/Chrome app.";
     const prov=new firebase.auth.GoogleAuthProvider();
-    if(IS_MOBILE){ window.__kzStep="signin-redirect"; await auth.signInWithRedirect(prov); return done(); }
+    if(IS_MOBILE){
+      window.__kzStep="signin-redirect";
+      localStorage.setItem(LS_AUTH_RETURN,JSON.stringify({tab:"profile",at:Date.now()}));
+      await auth.signInWithRedirect(prov);
+      return;
+    }
     try{ window.__kzStep="signin-popup"; await auth.signInWithPopup(prov); window.__kzStep="signin-popup-ok"; }
     catch(e){
-      if(e.code==="auth/popup-blocked"||e.code==="auth/popup-closed-by-user"){ window.__kzStep="signin-redirect"; await auth.signInWithRedirect(prov); return done(); }
+      if(e.code==="auth/popup-blocked"||e.code==="auth/popup-closed-by-user"){
+        window.__kzStep="signin-redirect";
+        localStorage.setItem(LS_AUTH_RETURN,JSON.stringify({tab:"profile",at:Date.now()}));
+        await auth.signInWithRedirect(prov);
+        return;
+      }
       if(e.code==="auth/cancelled-popup-request"){ return done("Sign-in already in progress — finish the popup."); }
       if(e.code==="auth/operation-not-supported-in-this-environment"){
         $("#duoStatus").textContent="This in-app browser can't sign in — open kaizen in Safari/Chrome directly, then sign in.";
@@ -926,6 +936,15 @@ function renderAll(){ renderTop(); renderHome(); }
       auth.onAuthStateChanged(u=>{ try{
         window.__kzStep="auth-changed:"+(u?"signed-in":"signed-out");
         refreshAuthUI();
+        if(u){
+          let returned=null;
+          try{ returned=JSON.parse(localStorage.getItem(LS_AUTH_RETURN)||"null"); }catch{}
+          if(returned&&Date.now()-(returned.at||0)<10*60*1000){
+            localStorage.removeItem(LS_AUTH_RETURN);
+            const tab=document.querySelector(`[data-tab="${returned.tab||"profile"}"]`);
+            if(tab) tab.click();
+          }
+        }
         if(u){ if(!S.name){ S.name=u.displayName||""; S.photo=u.photoURL||""; store.save(LS_MAIN,S); }
           if(DUO.on&&DUO.room&&DUO.uid!==u.uid){ DUO.uid=u.uid; store.save(LS_DUO,DUO); }
           if(DUO.on&&DUO.room&&!roomRef){ S.name=S.name||u.displayName||""; connect(); } }
