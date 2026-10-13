@@ -1,6 +1,6 @@
 /* Kaizen — social progression platform.
    Home · Paths · Focus · Social · Profile. Offline-first; Firebase duo sync optional. */
-const APP_V = "1.9";
+const APP_V = "2.0";
 window.addEventListener("error", e => {
   const t = document.querySelector("#errToast");
   if (t) { const where = (e.error && e.error.stack || "").split("\n")[1] || "";
@@ -147,7 +147,8 @@ function completion(cid,did){ const deck=deckById(cid,did); if(!deck||!deck.card
   const sn=(S.courses[cid]||{seen:{}}).seen[`${cid}:${did}`]||{};
   return Math.round(100*Object.keys(sn).length/deck.cards.length); }
 function checkBadges(){
-  const give=id=>{ if(!S.badges.includes(id)){ S.badges.push(id); S.gems+=3; feed(`unlocked “${id}”`,"mastery"); } };
+  const nm=id=>{ const b=(typeof BADGES!=="undefined"?BADGES:[]).find(x=>x[0]===id); return b?b[2]:id; };
+  const give=id=>{ if(!S.badges.includes(id)){ S.badges.push(id); S.gems+=3; feed(`unlocked "${nm(id)}"`,"mastery"); } };
   const allD=Object.values(S.courses).flatMap(c=>Object.values(c.decks||{}));
   const tot=allD.reduce((s,d)=>s+(d.total||0),0), cor=allD.reduce((s,d)=>s+(d.correct||0),0);
   const t=(S.courses[S.activeCourse]?.days||{})[today()]||{answers:0,correct:0};
@@ -336,20 +337,23 @@ function renderStrip(){
   const me={name:S.name||"You",self:true};
   const cards=[...mateList().filter(p=>p.settings?.showActivity!==false).slice(0,8),me];
   cards.forEach(p=>{
-    const ps = p.self?presenceState(SESS?{state:SESS.state,label:SESS.label,startedAt:SESS.startedAt}:null):presenceState(p.presence);
+    let ps, nm;
+    if(p.self){ nm=(S.name||"You")+" (you)";
+      ps=SESS?presenceState({state:SESS.state,label:SESS.label,startedAt:SESS.startedAt}):{cls:"online",label:"Online",detail:"browsing"};
+    } else { nm=p.name||"?"; ps=presenceState(p.presence); }
     if(ps.cls==="on"&&!p.self) activeN++;
     const pic=(p.self?S.photo:p.photo);
     const av=pic?`<img src="${pic}" alt="" style="width:52px;height:52px;border-radius:50%;object-fit:cover;margin:0 auto 4px;display:block">`
-      :`<div class="av2">${esc((p.name||"?")[0].toUpperCase())}</div>`;
+      :`<div class="av2">${esc((nm||"?")[0].toUpperCase())}</div>`;
     const el=document.createElement("div"); el.className="friend "+ps.cls;
-    el.innerHTML=`${av}<b>${esc(p.self?(S.name||"You"):(p.name||"?"))}</b><small>${ps.label}${ps.detail?" · "+esc(ps.detail):""}</small>`;
+    el.innerHTML=`${av}<b>${esc(nm)}</b><small>${ps.label}${ps.detail?" · "+esc(ps.detail):""}</small>`;
     w.appendChild(el); });
   const extra=mateList().length-8;
   $("#activeCount").textContent = mateList().length?`${activeN+(SESS?1:0)} studying right now${extra>0?` · +${extra} more in Social`:""}`
     :"Connect others in Profile → Connection to study together.";
 }
-function renderHomeFeed(){ const el=$("#homeFeed");
-  el.innerHTML=feedCache.slice(0,3).map(feedHTML).join("")||`<p class="muted">No activity yet.</p>`;
+function renderHomeFeed(){ const el=$("#homeFeed"); if(!el) return;
+  el.innerHTML=feedCache.slice(0,3).map(x=>feedHTML(x,applauseMap[x.k])).join("")||`<p class="muted">No activity yet.</p>`;
   bindApplause(el); }
 
 /* ---------- PATHS ---------- */
@@ -621,13 +625,23 @@ function voteVideo(cid,vidId,val){
   const ref=DB.ref(`rooms/${DUO.room}/cvideos/${cid}/${vidId}/votes/${DUO.uid}`);
   ref.transaction(cur=>{ if(cur===val) return null; return val; }); }
 function feedHTML(x,ap){ const n=ap||{};
+  const cheered=n.mine?"Cheered ✓":"Cheer";
   return `<div class="feed-it"><b>${esc(x.name)}</b> ${esc(x.text)}<small>${new Date(x.t).toLocaleString()}</small>
-  <div class="acts"><button class="applaud" data-k="${x.k}">Cheer${n.c?` · ${n.c}`:""}</button></div></div>`; }
+  <div class="acts"><button class="applaud${n.mine?" did":""}" data-k="${x.k}">${cheered}${n.c?` · ${n.c}`:""}</button></div></div>`; }
 function bindApplause(root){ root.querySelectorAll(".applaud").forEach(b=>b.onclick=()=>{
   const k=b.dataset.k;
   if(!DB||!DUO.on){ b.textContent="Join room to cheer"; setTimeout(()=>renderSocial(),1500); return; }
-  try{ DB.ref(`rooms/${DUO.room}/applause/${k}/${DUO.uid}`).set(S.name||"You"); markPush(); }
-  catch(e){ syncErr(e); } }); }
+  const mine=applauseMap[k]&&applauseMap[k].mine;
+  try{
+    if(mine){ DB.ref(`rooms/${DUO.room}/applause/${k}/${DUO.uid}`).remove(); }
+    else{
+      DB.ref(`rooms/${DUO.room}/applause/${k}/${DUO.uid}`).set(S.name||"You");
+      const item=feedCache.find(x=>x.k===k), owner=item?item.name:"";
+      if(owner&&owner!==(S.name||"")) feed(`${S.name||"Someone"} cheered ${owner}'s update`,"cheer");
+      b.textContent="Sent ✓";
+    }
+    markPush();
+  }catch(e){ syncErr(e); } }); }
 function renderFeed(v){ if(v!==undefined) feedCache=Object.entries(v).map(([k,x])=>({...x,k})).sort((a,b)=>b.t-a.t);
   const el=$("#feed"); if(!el) return;
   el.innerHTML=feedCache.slice(0,15).map(x=>feedHTML(x,applauseMap[x.k])).join("")||`<p class="muted">No activity yet.</p>`;
@@ -744,7 +758,7 @@ function connect(){
     const wFeed=(v)=>{ pulled(); renderFeed(v); };
     watch(roomRef.child("feed").limitToLast(20), wFeed);
     watch(roomRef.child("applause"), v=>{ pulled(); applauseMap={};
-      Object.entries(v||{}).forEach(([k,o])=>applauseMap[k]={c:Object.keys(o).length});
+      Object.entries(v||{}).forEach(([k,o])=>applauseMap[k]={c:Object.keys(o).length,mine:!!(DUO.uid&&o[DUO.uid])});
       renderFeed(Object.fromEntries(feedCache.map(x=>[x.k,x]))); });
     watch(roomRef.child("challenges"), v=>{ pulled(); peerChallenges=v?Object.values(v):[]; renderChallenges(); });
     watch(roomRef.child("cvideos"), v=>{ pulled(); cvCache=v||{}; renderCvideos(); });

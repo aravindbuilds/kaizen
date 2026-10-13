@@ -51,6 +51,7 @@ a{color:var(--acc)}
 .feed-it small{color:var(--mut); display:block; font-size:.76em; margin-top:2px}
 .feed-it .acts{margin-top:8px; display:flex; gap:8px}
 .applaud{border:1px solid var(--line); background:#0d0c0a; color:var(--ink); border-radius:99px; padding:4px 14px; font-size:.82em; cursor:pointer}
+.applaud.did{border-color:var(--acc); color:var(--acc); font-weight:700}
 .applaud.did{border-color:var(--ink); font-weight:700}
 /* paths */
 .path{cursor:pointer} .path.active{border-color:var(--ink)}
