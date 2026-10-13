@@ -432,7 +432,7 @@ function openPath(cid){
     <div class="sect">Plan</div><div class="md">${md(M.plan)}</div>
     <div class="sect">Resources</div><div class="md">${md(M.resources)}</div>
     <div class="sect">Videos</div><div class="row wrap" id="pdVids"></div>
-    <div class="video-frame"><iframe id="pdFrame" src="" title="Course videos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+    <div class="video-frame"><iframe id="pdFrame" class="hidden" src="" title="Course videos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
     <div class="sect">Community videos</div>
     <div class="row"><input id="pdCvLabel" placeholder="Title (optional)" maxlength="80" style="max-width:38%"><input id="pdCvLink" placeholder="Paste YouTube link to share…" inputmode="url"></div>
     <div class="row"><button class="btn" id="pdCvAdd">Share with the room</button></div>
@@ -442,24 +442,37 @@ function openPath(cid){
   const weak=M.decks.map(x=>({x,m:mastery(cid,x.id),n:((S.courses[cid]?.decks||{})[`${cid}:${x.id}`]||{total:0}).total}))
     .filter(x=>x.n>0).sort((a,b)=>a.m-b.m);
   ins.innerHTML=weak.length?`<p>Strongest: <b>${[...weak].sort((a,b)=>b.m-a.m)[0].x.title}</b> · Needs work: <b>${weak[0].x.title}</b> (${weak[0].m}%). Accuracy overall ${acc}%.</p>`:`<p class="muted">Practise to unlock insights.</p>`;
-  const vw=$("#pdVids"); (M.videos||[]).forEach((v,i)=>{ const b=document.createElement("button");
-    b.className="btn"; b.textContent=v.label;
-    b.onclick=()=>{ $("#pdFrame").src=v.videoId?`https://www.youtube.com/embed/${v.videoId}`
-      :`https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(v.query)}`; };
-    vw.appendChild(b);
-    if(i===0) b.onclick(); });
+  const vw=$("#pdVids"); (M.videos||[]).forEach((v,i)=>{
+    if(v.videoId){
+      const b=document.createElement("button");
+      b.className="btn"; b.textContent=v.label;
+      b.onclick=()=>{ const frame=$("#pdFrame"); frame.src=`https://www.youtube.com/embed/${v.videoId}`; frame.classList.remove("hidden"); };
+      vw.appendChild(b);
+      if(i===0) b.onclick();
+      return;
+    }
+    if(v.query){
+      const b=document.createElement("a");
+      b.className="btn"; b.textContent=`Search ${v.label}`;
+      b.href=`https://www.youtube.com/results?search_query=${encodeURIComponent(v.query)}`;
+      b.target="_blank"; b.rel="noopener";
+      vw.appendChild(b);
+    }
+  });
   renderCvideos();
   const sv=document.createElement("div"); sv.innerHTML=`<div class="row" style="margin-top:8px"><input id="pdYt" placeholder="Save a YouTube link or ID…" inputmode="url"><button class="btn" id="pdYtAdd" style="flex:none">Save</button></div><div class="row wrap" id="pdMine"></div>`;
   vw.after(sv);
   const renderMine=()=>{ const m=$("#pdMine"); m.innerHTML="";
     (S.myVids[cid]||[]).forEach(id=>{ const b=document.createElement("button"); b.className="btn"; b.textContent="Play "+id;
-      b.onclick=()=>$("#pdFrame").src="https://www.youtube.com/embed/"+id; m.appendChild(b); }); };
+      b.onclick=()=>{ const frame=$("#pdFrame"); frame.src="https://www.youtube.com/embed/"+id; frame.classList.remove("hidden"); }; m.appendChild(b); }); };
   const ytId=s=>{ s=(s||"").trim(); const mt=s.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
     if(mt) return mt[1]; return /^[A-Za-z0-9_-]{11}$/.test(s)?s:null; };
   $("#pdYtAdd").onclick=()=>{ const v=$("#pdYt").value, id=ytId(v);
     if(id){ const l=S.myVids[cid]=S.myVids[cid]||[]; l.unshift(id); S.myVids[cid]=l.slice(0,12);
-      store.save(LS_MAIN,S); $("#pdFrame").src="https://www.youtube.com/embed/"+id; $("#pdYt").value=""; renderMine(); scheduleUpload(); }
-    else if(v.trim()){ $("#pdFrame").src=`https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(v.trim())}`; } };
+      store.save(LS_MAIN,S); const frame=$("#pdFrame"); frame.src="https://www.youtube.com/embed/"+id; frame.classList.remove("hidden"); $("#pdYt").value=""; renderMine(); scheduleUpload(); }
+    else if(v.trim()){
+      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(v.trim())}`,"_blank","noopener");
+    } };
   renderMine();
   try{ d.scrollIntoView({behavior:"smooth",block:"start"}); }catch{}
   $("#pdGo").onclick=()=>{ S.activeCourse=cid; store.save(LS_MAIN,S); renderAll();
@@ -633,8 +646,12 @@ function renderCvideos(){ const box=$("#pdCommunity"); if(!box) return;
     <div class="vote"><button data-v="1" data-id="${v.id}" class="${mine===1?"on":""}">▲</button><b>${cvScore(v)}</b><button data-v="-1" data-id="${v.id}" class="${mine===-1?"on":""}">▼</button></div></div>`; }).join("");
   box.innerHTML=(DB&&DUO.on?"":`<p class="muted tiny">Connect (Profile) to see community videos.</p>`)
     + (items||`<p class="muted tiny">No community videos yet — add the first.</p>`);
-  box.querySelectorAll("[data-play]").forEach(im=>im.onclick=()=>{ $("#pdFrame").src="https://www.youtube.com/embed/"+im.dataset.play; });
-  box.querySelectorAll("[data-q]").forEach(im=>im.onclick=()=>{ $("#pdFrame").src="https://www.youtube.com/embed?listType=search&list="+encodeURIComponent(im.dataset.q); });
+  box.querySelectorAll("[data-play]").forEach(im=>im.onclick=()=>{
+    const frame=$("#pdFrame"); frame.src="https://www.youtube.com/embed/"+im.dataset.play; frame.classList.remove("hidden");
+  });
+  box.querySelectorAll("[data-q]").forEach(im=>im.onclick=()=>{
+    window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(im.dataset.q)}`,"_blank","noopener");
+  });
   box.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>voteVideo(cid,b.dataset.id,+b.dataset.v));
   const add=$("#pdCvAdd"); if(add) add.onclick=addCommunityVideo; }
 function ytParse(s){ s=(s||"").trim(); const m=s.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
