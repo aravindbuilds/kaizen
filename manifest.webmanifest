@@ -1,0 +1,20 @@
+{
+  "name": "Kaizen — Better than yesterday",
+  "short_name": "Kaizen",
+  "description": "Personal progress, focused study sessions, and friendly competition.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#14120f",
+  "theme_color": "#14120f",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "assets/kaizen-mark.png",
+      "sizes": "768x768",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

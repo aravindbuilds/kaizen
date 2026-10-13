@@ -300,6 +300,13 @@ function beginWork(kind,id){ prKind=kind; prId=id; order=shuffle(items().map((_,
 /* mobile nav must not depend on media queries alone (some webviews misreport them) */
 function fitNav(){ try{ document.body.classList.toggle("mobile",(window.innerWidth||0)<=640); }catch{} }
 window.addEventListener("resize",fitNav); window.addEventListener("orientationchange",()=>setTimeout(fitNav,300));
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("./sw.js").catch(e=>{
+      console.warn("offline shell unavailable",e);
+    });
+  });
+}
 /* ---------- tabs ---------- */
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); t.classList.add("active");

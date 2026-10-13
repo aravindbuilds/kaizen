@@ -6,6 +6,14 @@
 <title>Kaizen — Better than yesterday</title>
 <meta name="description" content="Kaizen: personal progress, focus sessions, friends and friendly competition.">
 <meta name="theme-color" content="#14120f">
+<meta name="background-color" content="#14120f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kaizen">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/kaizen-mark.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/kaizen-mark.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,7 +21,13 @@
 <div id="app">
 
   <header class="topbar">
-    <div class="brand">Kaizen <span class="tagline">Better than yesterday.</span></div>
+    <a class="brand" href="./" aria-label="Kaizen home">
+      <img src="assets/kaizen-mark.png" alt="Kaizen">
+      <span class="brand-copy">
+        <strong>KAIZEN</strong>
+        <span class="tagline">Better than yesterday.</span>
+      </span>
+    </a>
     <div class="top-stats">
       <div class="stat"><b id="xpTop">0</b> <span>XP today</span></div>
       <div class="stat"><b id="streakTop">0</b> <span>day streak</span></div>
