@@ -10,12 +10,25 @@ window.addEventListener("error", e => {
     t.classList.remove("hidden"); clearTimeout(window.__errT);
     window.__errT = setTimeout(() => t.classList.add("hidden"), 12000); }
 });
+window.addEventListener("unhandledrejection", e => {
+  const t = document.querySelector("#errToast");
+  const reason = e.reason || {};
+  const msg = reason.message || String(reason) || "unknown error";
+  if (t) {
+    t.textContent = "Something hiccuped: " + msg + " [at: " + (window.__kzStep || "?") + "]";
+    t.classList.remove("hidden"); clearTimeout(window.__errT);
+    window.__errT = setTimeout(() => t.classList.add("hidden"), 12000);
+  }
+});
 const $ = s => document.querySelector(s);
 const LS_MAIN = "kaizen_v2", LS_DUO = "kaizen_duo", LS_SEEN = "kaizen_feedseen", LS_AUTH_RETURN = "kaizen_auth_return";
 const store = {
   load(k){ try{ return JSON.parse(localStorage.getItem(k)) || null }catch{ return null } },
-  save(k,v){ localStorage.setItem(k, JSON.stringify(v)) }
+  save(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); return true; }catch{ return false; } }
 };
+function safeStoreGet(k){ try{ return localStorage.getItem(k); }catch{ return null; } }
+function safeStoreSet(k,v){ try{ localStorage.setItem(k,v); return true; }catch{ return false; } }
+function safeStoreRemove(k){ try{ localStorage.removeItem(k); }catch{} }
 const today = () => new Date().toISOString().slice(0,10);
 const dayKey = (off=0) => new Date(Date.now()-off*864e5).toISOString().slice(0,10);
 function dflt(){ return { v:3, xp:0, gems:0, streak:0, best:0, lastDay:"", chestDay:"", name:"",
@@ -807,7 +820,13 @@ function ensureApp(){
   DB=firebase.database();
   return firebase.auth();
 }
-function authUser(){ try{ return ensureApp(), firebase.auth().currentUser; }catch{ return null; } }
+function authUser(){
+  try{
+    if(typeof firebase==="undefined"||!cfg().firebaseConfig) return null;
+    if(!firebase.apps.length) firebase.initializeApp(cfg().firebaseConfig);
+    return firebase.auth().currentUser;
+  }catch{ return null; }
+}
 let signInBusy=false;
 const IS_MOBILE=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||"");
 async function persistBest(auth){
@@ -832,27 +851,31 @@ async function signIn(){
       $("#duoStatus").textContent="Note: this browser blocks storage — sign-in will last this tab only. Prefer Safari/Chrome app.";
     const prov=new firebase.auth.GoogleAuthProvider();
     if(IS_MOBILE){
-      window.__kzStep="signin-redirect";
-      localStorage.setItem(LS_AUTH_RETURN,JSON.stringify({tab:"profile",at:Date.now()}));
-      await auth.signInWithRedirect(prov);
-      return;
-    }
-    try{ window.__kzStep="signin-popup"; await auth.signInWithPopup(prov); window.__kzStep="signin-popup-ok"; }
-    catch(e){
-      if(e.code==="auth/popup-blocked"||e.code==="auth/popup-closed-by-user"){
-        window.__kzStep="signin-redirect";
-        localStorage.setItem(LS_AUTH_RETURN,JSON.stringify({tab:"profile",at:Date.now()}));
-        await auth.signInWithRedirect(prov);
+      try{
+        window.__kzStep="signin-mobile-popup";
+        const result=await auth.signInWithPopup(prov);
+        window.__kzStep="signin-mobile-popup-ok";
+        if(result&&result.user) handleAuthUser(result.user);
+        done();
         return;
+      }catch(e){
+        const popupBlocked=["auth/popup-blocked","auth/popup-closed-by-user","auth/operation-not-supported-in-this-environment"].includes(e.code);
+        if(!popupBlocked) throw e;
       }
-      if(e.code==="auth/cancelled-popup-request"){ return done("Sign-in already in progress — finish the popup."); }
-      if(e.code==="auth/operation-not-supported-in-this-environment"){
-        $("#duoStatus").textContent="This in-app browser can't sign in — open kaizen in Safari/Chrome directly, then sign in.";
-        return done();
-      }
-      throw e;
     }
-    done();
+    try{
+      window.__kzStep="signin-popup";
+      const result=await auth.signInWithPopup(prov);
+      window.__kzStep="signin-popup-ok";
+      if(result&&result.user) handleAuthUser(result.user);
+      done();
+    }catch(e){
+      if(!["auth/popup-blocked","auth/popup-closed-by-user","auth/operation-not-supported-in-this-environment"].includes(e.code))
+        throw e;
+      window.__kzStep="signin-redirect";
+      safeStoreSet(LS_AUTH_RETURN,JSON.stringify({tab:"profile",at:Date.now()}));
+      await auth.signInWithRedirect(prov);
+    }
   }catch(e){
     let msg="Sign-in failed: "+(e.message||e);
     if(String(e.code||"").includes("unauthorized-domain"))
@@ -869,12 +892,29 @@ async function signOut(){
   $("#dcBtn").classList.add("hidden"); refreshAuthUI();
   $("#duoStatus").textContent="Signed out. Offline mode.";
   renderStrip(); if(document.querySelector('[data-tab="social"]').classList.contains("active")) renderSocial(); }
-function refreshAuthUI(){
-  const u=authUser(), has=!!u;
+function refreshAuthUI(current){
+  const u=current===undefined?authUser():current, has=!!u;
   $("#authBox").classList.toggle("hidden",has);
   $("#userBox").classList.toggle("hidden",!has);
   if(has){ $("#userName").textContent=u.displayName||S.name||"You"; $("#userMail").textContent=u.email||"";
     if(!$("#nameInput").value) $("#nameInput").value=u.displayName||""; }
+}
+let handledAuthUid="";
+function handleAuthUser(u){
+  if(!u||handledAuthUid===u.uid) return;
+  handledAuthUid=u.uid;
+  window.__kzStep="auth-user:"+u.uid.slice(-6);
+  refreshAuthUI(u);
+  let returned=null;
+  try{ returned=JSON.parse(safeStoreGet(LS_AUTH_RETURN)||"null"); }catch{}
+  if(returned&&Date.now()-(returned.at||0)<10*60*1000){
+    safeStoreRemove(LS_AUTH_RETURN);
+    const tab=document.querySelector(`[data-tab="${returned.tab||"profile"}"]`);
+    if(tab) tab.click();
+  }
+  if(!S.name){ S.name=u.displayName||""; S.photo=u.photoURL||""; store.save(LS_MAIN,S); }
+  if(DUO.on&&DUO.room&&DUO.uid!==u.uid){ DUO.uid=u.uid; store.save(LS_DUO,DUO); }
+  if(DUO.on&&DUO.room&&!roomRef){ S.name=S.name||u.displayName||""; connect(); }
 }
 $("#googleBtn").onclick=signIn;
 $("#signOutBtn").onclick=signOut;
@@ -930,24 +970,21 @@ function renderAll(){ renderTop(); renderHome(); }
       DB=firebase.database();
       const auth=firebase.auth();
       auth.getRedirectResult()
-        .then(res=>{ if(res&&res.user){ window.__kzStep="redirect-ok"; } })
+        .then(res=>{
+          if(res&&res.user){
+            window.__kzStep="redirect-ok";
+            handleAuthUser(res.user);
+          }
+        })
         .catch(e=>{ window.__kzStep="redirect-err";
-          $("#duoStatus").textContent="Sign-in return failed: "+(e.message||e); });
+          safeStoreRemove(LS_AUTH_RETURN);
+          $("#duoStatus").textContent="Sign-in return failed: "+(e.message||e);
+          const b=$("#googleBtn"); if(b){ b.disabled=false; b.textContent="Try Google sign-in again"; }
+        });
       auth.onAuthStateChanged(u=>{ try{
         window.__kzStep="auth-changed:"+(u?"signed-in":"signed-out");
-        refreshAuthUI();
-        if(u){
-          let returned=null;
-          try{ returned=JSON.parse(localStorage.getItem(LS_AUTH_RETURN)||"null"); }catch{}
-          if(returned&&Date.now()-(returned.at||0)<10*60*1000){
-            localStorage.removeItem(LS_AUTH_RETURN);
-            const tab=document.querySelector(`[data-tab="${returned.tab||"profile"}"]`);
-            if(tab) tab.click();
-          }
-        }
-        if(u){ if(!S.name){ S.name=u.displayName||""; S.photo=u.photoURL||""; store.save(LS_MAIN,S); }
-          if(DUO.on&&DUO.room&&DUO.uid!==u.uid){ DUO.uid=u.uid; store.save(LS_DUO,DUO); }
-          if(DUO.on&&DUO.room&&!roomRef){ S.name=S.name||u.displayName||""; connect(); } }
+        if(u) handleAuthUser(u);
+        else refreshAuthUI();
       }catch(e){ window.__kzStep="auth-handler-err";
         $("#duoStatus").textContent="Signed in, but something stumbled after: "+(e.message||e); } });
     }

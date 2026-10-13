@@ -2,7 +2,7 @@
  {
   "id": "prelim-mock-1",
   "title": "Prelims Mock 1",
-  "desc": "20 questions • 20 min • −0.25",
+  "desc": "25 questions • 25 min • −0.25",
   "track": "prelims",
   "questions": [
    {
@@ -14,20 +14,20 @@
      "and a musician"
     ],
     "answer": 3,
-    "explain": "Two nouns, same person → article once: 'a doctor and musician'.",
+    "explain": "Rule: when two nouns describe the SAME person and are joined by 'and', the article comes only before the first noun. Here the friend is one person who is both doctor and musician, so the second 'a' is wrong. Correct sentence: '...is now a doctor and musician.' If they were two different people, both articles would stay.",
     "tag": "article",
     "deck": "english"
    },
    {
-    "q": "Choose correct: ___ several disputes, the couple stayed together.",
+    "q": "Choose the correct sentence.",
     "options": [
-     "Despite of",
-     "Despite",
-     "In spite",
-     "Although of"
+     "Despite of several disputes, they stayed.",
+     "Despite several disputes, they stayed.",
+     "Despite of the fact they stayed.",
+     "Although of disputes they stayed."
     ],
     "answer": 1,
-    "explain": "Despite never takes 'of'. (In spite OF is correct.)",
+    "explain": "'Despite' is already a complete preposition and never takes 'of' — the error 'despite of' is a classic trap. Its cousin 'in spite' DOES need 'of' ('in spite of disputes'). 'Although' is a conjunction, so 'although of' is never correct.",
     "tag": "preposition",
     "deck": "english"
    },
@@ -40,7 +40,7 @@
      "economize"
     ],
     "answer": 1,
-    "explain": "'a number of' + plural noun.",
+    "explain": "'A number of' always takes a PLURAL noun — it means 'several'. Contrast with 'the number of', which takes a singular verb ('The number of cases IS rising'). Also, only the noun 'economies' fits; 'economical' is an adjective.",
     "tag": "grammar",
     "deck": "english"
    },
@@ -53,20 +53,20 @@
      "entrust"
     ],
     "answer": 0,
-    "explain": "Fitful = irregular. Perpetual is a synonym.",
+    "explain": "'Constant' = steady, unchanging. 'Fitful' = irregular, starting and stopping — the direct opposite. Watch out: 'perpetual' (never-ending) is a SYNONYM of constant, and 'prevalent' means widespread, which is unrelated.",
     "tag": "vocab",
     "deck": "english"
    },
    {
-    "q": "Incorrect spelling?",
+    "q": "Spot the misspelt word: plosible / explanation / government",
     "options": [
      "plosible",
      "explanation",
      "government",
-     "conservative"
+     "No error"
     ],
     "answer": 0,
-    "explain": "plosible → plausible (reasonable).",
+    "explain": "The word is PLAUSIBLE (p-l-a-u-s-i-b-l-e), meaning reasonable or believable. Remember it with 'applause': plau-sible. 'Explanation' and 'government' (note: govern + ment, no extra n) are spelt correctly.",
     "tag": "spelling",
     "deck": "english"
    },
@@ -79,20 +79,33 @@
      "conveying"
     ],
     "answer": 0,
-    "explain": "Fetching = go and bring back.",
+    "explain": "'Fetching' means going somewhere and bringing something back — exactly what collecting water involves. 'Captivating' means fascinating people, 'abandoning' means leaving behind, 'conveying' means communicating ideas. Only fetching fits daily water collection.",
     "tag": "vocab",
     "deck": "english"
    },
    {
-    "q": "All pens are books. Some books are chairs. 'Some pens are chairs'?",
+    "q": "Neither of the answers ___ correct.",
     "options": [
-     "Definitely true",
-     "Definitely false",
-     "Either 'some are' or 'none is'",
-     "Cannot say"
+     "are",
+     "is",
+     "were",
+     "have"
     ],
-    "answer": 2,
-    "explain": "All+Some = no definite; Some/No pair gives either-or.",
+    "answer": 1,
+    "explain": "'Neither of' is always singular — think of it as 'not one and not the other'. So it takes 'is', never 'are/were/have'. Same rule for 'either of' and 'each of': 'Each of the boys HAS a pen.'",
+    "tag": "sva",
+    "deck": "english"
+   },
+   {
+    "q": "All pens are books. Some books are chairs. Valid conclusion?",
+    "options": [
+     "Some pens are chairs (definite)",
+     "Either 'some pens are chairs' or 'no pen is chair'",
+     "All pens are chairs",
+     "No conclusion possible"
+    ],
+    "answer": 1,
+    "explain": "All + Some yields NO definite conclusion (the middle term 'books' isn't distributed to link pens to chairs). But 'Some pens are chairs' and 'No pen is a chair' are complementary (same subject-predicate, one Some one No) — one must be true. Hence either-or.",
     "tag": "syllogism",
     "deck": "reasoning"
    },
@@ -105,25 +118,25 @@
      "Nothing definite"
     ],
     "answer": 0,
-    "explain": "Only-a-few = some + some-not, both true.",
+    "explain": "'Only a few' is special: it guarantees BOTH 'Some Perk are Kitkat' AND 'Some Perk are NOT Kitkat' as definite conclusions. It behaves like Some + Some-not combined — a favourite trap because test-takers treat it as plain 'some'.",
     "tag": "syllogism",
     "deck": "reasoning"
    },
    {
-    "q": "CAT → DBU. Pattern?",
+    "q": "CAT → DBU. DOG → ?",
     "options": [
-     "+1 each letter",
-     "+2 each letter",
-     "Reverse",
-     "Vowel shift"
+     "EPH",
+     "DPH",
+     "EOH",
+     "CNF"
     ],
     "answer": 0,
-    "explain": "C+1=D, A+1=B, T+1=U.",
+    "explain": "Each letter shifts +1: C→D, A→B, T→U. Apply to DOG: D→E, O→P, G→H = EPH. First check constant shifts (+1/+2) before trying complex patterns.",
     "tag": "coding",
     "deck": "reasoning"
    },
    {
-    "q": "Ravi: 'She is my grandfather's only son's daughter.' She is?",
+    "q": "'She is my grandfather's only son's daughter.' She is?",
     "options": [
      "Sister",
      "Mother",
@@ -131,12 +144,12 @@
      "Cousin"
     ],
     "answer": 0,
-    "explain": "Grandfather's only son = father; father's daughter = sister.",
+    "explain": "Work inside-out: grandfather's only son = my father. Father's daughter = my sister (or self if the speaker is female — with 'she', it's sister). Inside-out decoding prevents the classic mistake of jumping to aunt.",
     "tag": "blood",
     "deck": "reasoning"
    },
    {
-    "q": "8 around circle facing centre. P opposite Q. R 2nd right of P. R's right is…?",
+    "q": "8 around a circle facing centre. R's right side is?",
     "options": [
      "Clockwise",
      "Anti-clockwise",
@@ -144,12 +157,12 @@
      "Cannot say"
     ],
     "answer": 1,
-    "explain": "Facing centre, right = anti-clockwise.",
+    "explain": "Facing the centre, your right hand points anti-clockwise around the circle. Verify: stand at the top facing down (centre) — your right is the left side of the page = anti-clockwise direction. Facing AWAY from centre flips it.",
     "tag": "seating",
     "deck": "reasoning"
    },
    {
-    "q": "Statement: Govt bans plastic. Assumption: 'Plastic is harmful'?",
+    "q": "Govt bans plastic. Assumption 'plastic is harmful'?",
     "options": [
      "Implicit",
      "Not implicit",
@@ -157,8 +170,47 @@
      "Neither"
     ],
     "answer": 0,
-    "explain": "The reason for a ban is implicit; compliance is not.",
+    "explain": "An assumption must be unstated yet NECESSARY for the statement. A ban only makes sense if plastic is considered harmful → implicit. 'People will obey' is NOT implicit (compliance isn't required for the decision to ban). Test: negate it — if negation kills the statement, it's implicit.",
     "tag": "critical",
+    "deck": "reasoning"
+   },
+   {
+    "q": "Facing south, turn left, then left again. Facing?",
+    "options": [
+     "South",
+     "East",
+     "North",
+     "West"
+    ],
+    "answer": 2,
+    "explain": "Facing south, your left is east: South→East. Turn left again from east: left of east is north. So North. Two lefts (or two rights) = U-turn to the opposite direction.",
+    "tag": "direction",
+    "deck": "reasoning"
+   },
+   {
+    "q": "'He is the son of my grandmother's only son.' He is my?",
+    "options": [
+     "Father",
+     "Brother",
+     "Uncle",
+     "Cousin"
+    ],
+    "answer": 1,
+    "explain": "Grandmother's only son = my father. Father's son = my brother. Note: if the speaker is male it's 'brother'; the phrasing points to a male relative of the same generation → brother.",
+    "tag": "blood",
+    "deck": "reasoning"
+   },
+   {
+    "q": "C top floor, A just below C, B just below A (5 floors). B's floor?",
+    "options": [
+     "2nd",
+     "3rd",
+     "4th",
+     "5th"
+    ],
+    "answer": 1,
+    "explain": "Stack from top: C=5th, A=4th (just below C), B=3rd (just below A). 'Just below/above' means immediately adjacent — the strongest, easiest clue; always place it first.",
+    "tag": "puzzle",
     "deck": "reasoning"
    },
    {
@@ -170,8 +222,8 @@
      "Rs.503.8"
     ],
     "answer": 1,
-    "explain": "SI=1920. CI=1920×1.1×1.1−1920=403.2.",
-    "tag": "SI-CI",
+    "explain": "Step 1 — SI from X: 4800 × 20% × 2 = Rs.1920. Step 2 — this 1920 becomes principal for Y: amount = 1920 × 1.1 × 1.1 = Rs.2323.2. Step 3 — CI interest = amount − principal = 2323.2 − 1920 = Rs.403.2. Trap: 384 is 20% of 1920 (one year's interest), not two years compounded.",
+    "tag": "si-ci",
     "deck": "quant"
    },
    {
@@ -183,12 +235,12 @@
      "40 m/s"
     ],
     "answer": 1,
-    "explain": "600/(36−16)=30 m/s. Length=480m.",
+    "explain": "The extra 20 seconds (36−16) cover exactly the 600m platform, so speed = 600/20 = 30 m/s. Train length = 30×16 = 480m. Shortcut for these Qs: speed = platform length ÷ (platform time − pole time).",
     "tag": "train",
     "deck": "quant"
    },
    {
-    "q": "Series: 3, 29, 127, 345, ? (n³+2, odd n)",
+    "q": "Series: 3, 29, 127, 345, ? (odd cubes +2)",
     "options": [
      "511",
      "731",
@@ -196,7 +248,7 @@
      "1333"
     ],
     "answer": 1,
-    "explain": "9³+2=731. Odd cubes +2.",
+    "explain": "Each term is an odd cube plus 2: 1³+2=3, 3³+2=29, 5³+2=127, 7³+2=345, so 9³+2=729+2=731. Clue: numbers just above perfect cubes (127, 345) scream 'cube ± constant'.",
     "tag": "series",
     "deck": "quant"
    },
@@ -209,12 +261,12 @@
      "27, 5"
     ],
     "answer": 0,
-    "explain": "135=15×9, sum 24.",
+    "explain": "Need two numbers multiplying to +135 with sum +24 (signs: −24m means both negative factors... actually both numbers are positive 15 and 9 since −15×−9=+135 and −15−9=−24). So m=15 or 9. Rule: for x²−Sx+P, find factor pairs of P summing to S.",
     "tag": "quadratic",
     "deck": "quant"
    },
    {
-    "q": "144 km/h train crosses pole in 12.5s. Length?",
+    "q": "144 km/h train crosses a pole in 12.5s. Length?",
     "options": [
      "400m",
      "450m",
@@ -222,12 +274,12 @@
      "550m"
     ],
     "answer": 2,
-    "explain": "144×5/18=40 m/s ×12.5=500m.",
+    "explain": "Convert km/h to m/s with ×5/18: 144×5/18 = 40 m/s. A pole means distance = train's own length = speed × time = 40×12.5 = 500m. Memorize ×5/18 (km/h→m/s) and ×18/5 (reverse).",
     "tag": "train",
     "deck": "quant"
    },
    {
-    "q": "10 people avg 50kg. Total?",
+    "q": "10 people, average weight 50 kg. Total?",
     "options": [
      "450",
      "500",
@@ -235,8 +287,47 @@
      "600"
     ],
     "answer": 1,
-    "explain": "Total = avg × n = 500.",
+    "explain": "Total = average × count = 50×10 = 500 kg. Nearly every average Q is solved by converting to totals first, operating, then converting back.",
     "tag": "average",
+    "deck": "quant"
+   },
+   {
+    "q": "48% of 650 + 22% of 350 = ?",
+    "options": [
+     "389",
+     "399",
+     "379",
+     "409"
+    ],
+    "answer": 0,
+    "explain": "Split for mental math: 48% of 650 = (50%−2%) of 650 = 325−13 = 312. 22% of 350 = 10%×2 (=70) + 2% (=7) = 77. Total 312+77 = 389.",
+    "tag": "simplification",
+    "deck": "quant"
+   },
+   {
+    "q": "Series: 5, 11, 23, 47, ?",
+    "options": [
+     "71",
+     "83",
+     "95",
+     "119"
+    ],
+    "answer": 2,
+    "explain": "Each term doubles and adds 1: 5×2+1=11, 11×2+1=23, 23×2+1=47, so 47×2+1=95. Pattern family: ×2±1, ×3±2 — test these before anything exotic.",
+    "tag": "series",
+    "deck": "quant"
+   },
+   {
+    "q": "x²−11x+30=0. Roots?",
+    "options": [
+     "5, 6",
+     "3, 10",
+     "−5, −6",
+     "15, 2"
+    ],
+    "answer": 0,
+    "explain": "Need factors of 30 summing to 11: 5 and 6 (5×6=30, 5+6=11), both positive because the middle sign is negative... check: (x−5)(x−6)=x²−11x+30 ✓. So x=5 or 6. Option (b) multiplies to 30 but sums to 13 — always verify the sum.",
+    "tag": "quadratic",
     "deck": "quant"
    }
   ]
@@ -244,11 +335,11 @@
  {
   "id": "prelim-mock-2",
   "title": "Prelims Mock 2",
-  "desc": "20 questions • 20 min • −0.25",
+  "desc": "25 questions • 25 min • −0.25",
   "track": "prelims",
   "questions": [
    {
-    "q": "She ___ in hilly areas since her childhood. (lives / has been living)",
+    "q": "She ___ in hilly areas since her childhood.",
     "options": [
      "lives",
      "has been living",
@@ -256,7 +347,7 @@
      "will live"
     ],
     "answer": 1,
-    "explain": "'since' + starting point needs present perfect continuous.",
+    "explain": "'Since + a starting point in the past' (her childhood) with an action continuing to now always needs the present perfect continuous: has/have + been + verb-ing. So 'has been living'. Simple present 'lives' only suits habits with no 'since' clause, e.g. 'She lives in Shimla.'",
     "tag": "tense",
     "deck": "english"
    },
@@ -269,7 +360,7 @@
      "declining"
     ],
     "answer": 1,
-    "explain": "After/when/until + present tense for future events.",
+    "explain": "After time conjunctions (after, when, until, if, as soon as), use the PRESENT tense even when the main clause is future. The main clause already carries the future ('will conduct'), so 'will decline' repeats it wrongly. Correct: '...after cases decline.'",
     "tag": "tense",
     "deck": "english"
    },
@@ -282,12 +373,12 @@
      "intermittent"
     ],
     "answer": 0,
-    "explain": "Sustained = continued/suffered → persisted.",
+    "explain": "'Sustained' here means suffered/endured over time. 'Persisted' (continued to exist) is the closest match. 'Affiliated' means attached to an organisation, 'rendered' means provided/gave, and 'intermittent' (on-and-off) is nearly an antonym.",
     "tag": "vocab",
     "deck": "english"
    },
    {
-    "q": "Incorrect spelling?",
+    "q": "Spot the misspelt word: observatory / residents / strom / alerted",
     "options": [
      "observatory",
      "residents",
@@ -295,7 +386,7 @@
      "alerted"
     ],
     "answer": 2,
-    "explain": "strom → storm.",
+    "explain": "'strom' is missing its 'o' — the word is STORM (s-t-o-r-m). The others are correct: observatory (a building for watching the sky), residents (people living somewhere), alerted (warned).",
     "tag": "spelling",
     "deck": "english"
    },
@@ -308,7 +399,7 @@
      "conserve"
     ],
     "answer": 1,
-    "explain": "'Reserve stock' is the fixed collocation.",
+    "explain": "'Reserve stock' is the standard collocation — a reserve is something stored for emergencies. 'Buffer stock' exists too (for smoothing supply), but in the phrase 'zero ___ stock' for emergencies, 'reserve' is the expected answer. Preserve/conserve are verbs (protect/save), not nouns for stored goods.",
     "tag": "collocation",
     "deck": "english"
    },
@@ -321,8 +412,21 @@
      "absurd"
     ],
     "answer": 0,
-    "explain": "Coherent = logical, consistent.",
+    "explain": "'Coherent' means logical, consistent and well-organised — what a policy framework must be. The other three all mean illogical in different ways: ludicrous (laughably absurd), spurious (false though seeming true), absurd (wildly unreasonable).",
     "tag": "vocab",
+    "deck": "english"
+   },
+   {
+    "q": "He was accused ___ theft.",
+    "options": [
+     "of",
+     "for",
+     "with",
+     "about"
+    ],
+    "answer": 0,
+    "explain": "The fixed preposition with 'accused' is OF when naming the crime: 'accused of theft'. ('Accused for' or 'with' are common Indian-English errors.) Note the related pattern: 'charged WITH a crime' — accused→of, charged→with.",
+    "tag": "preposition",
     "deck": "english"
    },
    {
@@ -330,16 +434,16 @@
     "options": [
      "All pens are copies",
      "All copies are pens",
-     "Some copies are not pens",
-     "No pen is copy"
+     "No pen is a copy",
+     "Some pens are not copies"
     ],
     "answer": 1,
-    "explain": "Only A are B → All B are A (reversed!).",
+    "explain": "'Only A are B' REVERSES the All-statement: it means All B are A (every copy is a pen, but non-pens can never be copies). So 'all pens are copies' is false — pens need not be copies. Draw it: Copies circle fully inside Pens circle.",
     "tag": "syllogism",
     "deck": "reasoning"
    },
    {
-    "q": "A ≥ B > C = D ≤ E. Is A > D?",
+    "q": "A ≥ B > C = D. Is A > D?",
     "options": [
      "Yes",
      "No",
@@ -347,7 +451,7 @@
      "Only if E is large"
     ],
     "answer": 0,
-    "explain": "≥ combined with > gives >. Chain holds.",
+    "explain": "Collapse the chain from A to D: A ≥ B (at least as big), B > C (strictly bigger), C = D (equal). ≥ combined with > gives strict >: A > D definitely. Rule: one strict link anywhere makes the whole chain strict; '=' links are neutral.",
     "tag": "inequality",
     "deck": "reasoning"
    },
@@ -360,7 +464,7 @@
      "O"
     ],
     "answer": 2,
-    "explain": "Pairs sum to 27: 13+14. M↔N.",
+    "explain": "Opposite pairs sum to 27 (A=1+Z=26, B=2+Y=25...). M=13 needs 14=N. Shortcut: opposites are mirror positions — M (13th from start) ↔ N (13th from end).",
     "tag": "coding",
     "deck": "reasoning"
    },
@@ -373,7 +477,7 @@
      "South"
     ],
     "answer": 1,
-    "explain": "North→East→West.",
+    "explain": "Track step by step: North →(90° right)→ East →(180° left)→ West. A 180° turn always lands exactly opposite, so from East you face West. Draw a small compass for multi-turn Qs.",
     "tag": "direction",
     "deck": "reasoning"
    },
@@ -386,21 +490,60 @@
      "V"
     ],
     "answer": 2,
-    "explain": "Gaps +2,+3,+4,+5,+6 → O+6=U.",
+    "explain": "Gaps between letters grow: A→C (+2), C→F (+3), F→J (+4), J→O (+5), so next is +6: O+6=U. Arithmetic-gap series are the commonest alpha patterns — always compute gaps first.",
     "tag": "series",
     "deck": "reasoning"
    },
    {
-    "q": "40 students. Ravi 12th from left. From right if total 40 and 12th left… rank from right?",
+    "q": "40 students. Ravi 12th from left. From right?",
     "options": [
      "27th",
      "28th",
      "29th",
-     "Cannot say without more"
+     "Cannot say"
     ],
     "answer": 2,
-    "explain": "R = total − L + 1 = 29.",
+    "explain": "Formula: rank from other side = total − given rank + 1 = 40−12+1 = 29. The +1 corrects double-counting Ravi himself. Check: 12+29−1=40 ✓.",
     "tag": "ranking",
+    "deck": "reasoning"
+   },
+   {
+    "q": "Walk 4m east, 3m north. Distance from start?",
+    "options": [
+     "5m",
+     "6m",
+     "7m",
+     "12m"
+    ],
+    "answer": 0,
+    "explain": "East and north legs form a right angle: distance = √(4²+3²) = √25 = 5m (the 3-4-5 triple). Never add legs (7m) — displacement is the straight line, computed by Pythagoras.",
+    "tag": "direction",
+    "deck": "reasoning"
+   },
+   {
+    "q": "A is B's brother, B is C's mother. A is C's?",
+    "options": [
+     "Father",
+     "Uncle",
+     "Brother",
+     "Son"
+    ],
+    "answer": 1,
+    "explain": "B is C's mother, and A is B's brother → A is the mother's brother = maternal uncle. Chain method: replace B with 'C's mother' → 'A is (C's mother)'s brother' → uncle.",
+    "tag": "blood",
+    "deck": "reasoning"
+   },
+   {
+    "q": "Boxes X,Y,Z stacked. X above Y, Z below Y. Top?",
+    "options": [
+     "X",
+     "Y",
+     "Z",
+     "Cannot say"
+    ],
+    "answer": 0,
+    "explain": "Y is the middle reference: X is above it, Z below it → top-to-bottom order X, Y, Z. Top = X. Pick one item as anchor and hang every clue off it.",
+    "tag": "puzzle",
     "deck": "reasoning"
    },
    {
@@ -412,7 +555,7 @@
      "5.5h"
     ],
     "answer": 1,
-    "explain": "k=4 → still 24, stream 4, down 28. 126/28=4.5.",
+    "explain": "Let still=6k, stream=k. Upstream = still − stream = 5k = 20 → k=4. So still=24, stream=4, downstream = 24+4 = 28 km/h. Time = 126/28 = 4.5 hours. Remember: upstream subtracts, downstream adds.",
     "tag": "boat",
     "deck": "quant"
    },
@@ -425,12 +568,12 @@
      "12288"
     ],
     "answer": 2,
-    "explain": "×48, ÷6 alternating. 128×48=6144.",
+    "explain": "Alternate operations: ×48, then ÷6, repeating. 2×48=96, 96÷6=16, 16×48=768, 768÷6=128, so 128×48=6144. When a series jumps up-down-up, always test alternating patterns.",
     "tag": "series",
     "deck": "quant"
    },
    {
-    "q": "?×72/100 = 118 − 80% of 125",
+    "q": "?×72/100 = 118 − 80% of 125. Find ?",
     "options": [
      "18",
      "25",
@@ -438,12 +581,12 @@
      "36"
     ],
     "answer": 1,
-    "explain": "RHS=118−100=18. ?=18/0.72=25.",
+    "explain": "Simplify the right side first: 80% of 125 = 100, so RHS = 118−100 = 18. Then ? × 0.72 = 18 → ? = 18/0.72 = 25. Doing RHS first avoids messy decimals.",
     "tag": "percent",
     "deck": "quant"
    },
    {
-    "q": "(m−16)=32/(m−12). m?",
+    "q": "(m−16) = 32/(m−12). m?",
     "options": [
      "20, 8",
      "16, 12",
@@ -451,7 +594,7 @@
      "24, 4"
     ],
     "answer": 0,
-    "explain": "(m−16)(m−12)=32 → m²−28m+160=0.",
+    "explain": "Cross-multiply first: (m−16)(m−12)=32 → m²−28m+192−32=0 → m²−28m+160=0. Factor: need pair multiplying to 160, summing to 28 → 20 and 8. Always clear fractions before factoring.",
     "tag": "quadratic",
     "deck": "quant"
    },
@@ -464,12 +607,12 @@
      "1089"
     ],
     "answer": 1,
-    "explain": "Side 31, 31²=961.",
+    "explain": "Side = perimeter/4 = 31. Area = 31² = 961. Memorize squares around 30: 29²=841, 30²=900, 31²=961, 32²=1024 — they recur constantly.",
     "tag": "mensuration",
     "deck": "quant"
    },
    {
-    "q": "8% rent + 12% groceries, then 25% of remaining on transport. Total spent?",
+    "q": "8% rent + 12% groceries, then 25% of the rest on transport. Total spent?",
     "options": [
      "32%",
      "36%",
@@ -477,8 +620,47 @@
      "45%"
     ],
     "answer": 2,
-    "explain": "Remaining 80%, transport=20% of salary. 8+12+20=40%.",
+    "explain": "After rent+groceries, 80% remains. Transport = 25% OF that remainder = 0.25×80 = 20% of salary (not 25%!). Total = 8+12+20 = 40%. Trap: applying the second % to salary instead of the remainder.",
     "tag": "percent",
+    "deck": "quant"
+   },
+   {
+    "q": "31% of 1001 ≈ ?",
+    "options": [
+     "300",
+     "310",
+     "330",
+     "341"
+    ],
+    "answer": 1,
+    "explain": "Round to friendly numbers: ≈30% of 1000 = 300, plus ~1% of 1000 (=10) → 310. Approximation Qs reward rounding first, not exact computation.",
+    "tag": "approx",
+    "deck": "quant"
+   },
+   {
+    "q": "Series: 2, 6, 12, 20, 30, ?",
+    "options": [
+     "36",
+     "40",
+     "42",
+     "44"
+    ],
+    "answer": 2,
+    "explain": "First differences: +4, +6, +8, +10 — rising by 2 each time, so next difference is +12: 30+12=42. These are pronic numbers n(n+1): 1×2, 2×3, 3×4… 6×7=42.",
+    "tag": "series",
+    "deck": "quant"
+   },
+   {
+    "q": "Rs.10000 at 10% CI for 2 years. Amount?",
+    "options": [
+     "11000",
+     "12000",
+     "12100",
+     "12150"
+    ],
+    "answer": 2,
+    "explain": "Amount = P(1+r)ⁿ = 10000×1.1² = 10000×1.21 = 12100. (Interest alone would be 2100 — read whether the Q asks amount or interest; here it's amount.)",
+    "tag": "si-ci",
     "deck": "quant"
    }
   ]
@@ -490,7 +672,7 @@
   "track": "mains",
   "questions": [
    {
-    "q": "NIACL HQ + founded?",
+    "q": "New India Assurance HQ + founded?",
     "options": [
      "Mumbai, 1919",
      "Delhi, 1956",
@@ -498,12 +680,12 @@
      "Chennai, 1938"
     ],
     "answer": 0,
-    "explain": "New India Assurance, Mumbai, 1919 (Dorabji Tata).",
+    "explain": "New India Assurance — Mumbai HQ, founded 1919 by Dorabji Tata; India's largest public-sector general insurer. Contrast: LIC (life, 1956, Mumbai), GIC (reinsurance, 1972).",
     "tag": "static",
     "deck": "ga"
    },
    {
-    "q": "PMFBY Kharif farmer premium?",
+    "q": "PMFBY farmer premium — Kharif?",
     "options": [
      "1%",
      "1.5%",
@@ -511,25 +693,25 @@
      "5%"
     ],
     "answer": 2,
-    "explain": "Kharif 2%, Rabi 1.5%, commercial 5%.",
+    "explain": "PM Fasal Bima: Kharif 2%, Rabi 1.5%, commercial/horticultural 5% — government pays the balance. Mnemonic: 2-1.5-5 (Kharif-Rabi-commercial).",
     "tag": "scheme",
     "deck": "ga"
    },
    {
     "q": "Ayushman PM-JAY cover?",
     "options": [
-     "1L",
-     "2L",
-     "5L/family/yr",
-     "10L"
+     "Rs.1L",
+     "Rs.2L",
+     "Rs.5L per family/year",
+     "Rs.10L"
     ],
     "answer": 2,
-    "explain": "Rs.5 lakh cashless secondary+tertiary.",
+    "explain": "Rs.5 lakh per family per year, cashless, for secondary + tertiary hospitalization — the world's largest health cover scheme, run by the National Health Authority. Launched 2018 from Ranchi.",
     "tag": "scheme",
     "deck": "ga"
    },
    {
-    "q": "Reinsurance company of India?",
+    "q": "India's sole reinsurer?",
     "options": [
      "LIC",
      "GIC Re",
@@ -537,12 +719,12 @@
      "ECGC"
     ],
     "answer": 1,
-    "explain": "GIC Re, Mumbai — insurer of insurers.",
+    "explain": "GIC Re (General Insurance Corp, Mumbai) is the designated Indian reinsurer — it insures the insurers. LIC does life; AIC does crop (primary, not reinsurance); ECGC covers export credit.",
     "tag": "insurance",
     "deck": "ga"
    },
    {
-    "q": "Insurance FDI limit (2021+)?",
+    "q": "Insurance FDI limit (since 2021)?",
     "options": [
      "26%",
      "49%",
@@ -550,25 +732,51 @@
      "100%"
     ],
     "answer": 2,
-    "explain": "Raised 49→74% in 2021.",
+    "explain": "Raised from 49% to 74% in 2021 to pull foreign capital into insurers. Timeline: 26 (2000) → 49 (2015) → 74 (2021).",
     "tag": "current",
     "deck": "ga"
    },
    {
-    "q": "First-gen computers used?",
+    "q": "MUDRA Shishu limit?",
+    "options": [
+     "Rs.50,000",
+     "Rs.5L",
+     "Rs.10L",
+     "Rs.20L"
+    ],
+    "answer": 0,
+    "explain": "Shishu ≤50k (infant enterprise), Kishore 50k–5L, Tarun 5L–10L (plus Tarun Plus to 20L now). Shishu=smallest, matching the name (shishu=baby).",
+    "tag": "scheme",
+    "deck": "ga"
+   },
+   {
+    "q": "LIC established in?",
+    "options": [
+     "1938",
+     "1956",
+     "1972",
+     "1991"
+    ],
+    "answer": 1,
+    "explain": "Life Insurance Corporation of India came up in 1956 (Mumbai HQ) by nationalizing 245 insurers. Contrast GIC (general/reinsurance, 1972) to avoid the swap trap. 1938 is the old Insurance Act year - a deliberate distractor.",
+    "tag": "static",
+    "deck": "ga"
+   },
+   {
+    "q": "First-generation computers used?",
     "options": [
      "Transistors",
      "Vacuum tubes",
      "ICs",
-     "VLSI"
+     "VLSI chips"
     ],
     "answer": 1,
-    "explain": "G1 tubes (ENIAC) → transistors → IC → VLSI.",
+    "explain": "Gen 1 (1940s-50s, e.g. ENIAC/UNIVAC) ran on bulky, hot vacuum tubes. Then came transistors (G2), integrated circuits (G3), VLSI microprocessors (G4), and AI/parallel computing (G5). Order by shrinking size: tube → transistor → IC → chip.",
     "tag": "history",
     "deck": "ck"
    },
    {
-    "q": "Ctrl+Z / Ctrl+Y?",
+    "q": "Ctrl+Z / Ctrl+Y do?",
     "options": [
      "Cut/Paste",
      "Undo/Redo",
@@ -576,7 +784,7 @@
      "Save/Print"
     ],
     "answer": 1,
-    "explain": "Z undo, Y redo. F7 = spelling.",
+    "explain": "Z = undo last action, Y (or Ctrl+Shift+Z) = redo it. Neighbourhood: X/C/V cut-copy-paste, S save, P print, F find, H replace, F7 spelling. These six shortcuts cover most CK shortcut Qs.",
     "tag": "shortcuts",
     "deck": "ck"
    },
@@ -589,12 +797,12 @@
      "New slide"
     ],
     "answer": 1,
-    "explain": "F5=start, Shift+F5=current slide.",
+    "explain": "F5 starts the slideshow from slide 1; Shift+F5 starts from the CURRENT slide (handy while editing). F7 is spelling, F12 is Save As. Don't confuse with browser F5 (refresh).",
     "tag": "ppt",
     "deck": "ck"
    },
    {
-    "q": "HTTPS port?",
+    "q": "HTTPS default port?",
     "options": [
      "80",
      "443",
@@ -602,7 +810,7 @@
      "25"
     ],
     "answer": 1,
-    "explain": "HTTP 80, HTTPS 443, DNS 53, SMTP 25.",
+    "explain": "HTTP=80, HTTPS=443, DNS=53, SMTP=25, FTP=21. Secure variants just add a port: the S in HTTPS buys TLS encryption and the padlock. Memorize this five-row table cold.",
     "tag": "ports",
     "deck": "ck"
    },
@@ -615,8 +823,34 @@
      "Cache"
     ],
     "answer": 1,
-    "explain": "Arithmetic unit + control unit form the CPU.",
+    "explain": "The CPU is exactly Arithmetic-Logic Unit (does the math) + Control Unit (directs traffic) plus registers. RAM/ROM/cache are MEMORY — a different subsystem. ALU+CU=CPU is the single most-asked architecture one-liner.",
     "tag": "hardware",
+    "deck": "ck"
+   },
+   {
+    "q": "MICR is used on?",
+    "options": [
+     "Wi-Fi routers",
+     "Bank cheques",
+     "Fingerprints",
+     "Barcodes"
+    ],
+    "answer": 1,
+    "explain": "Magnetic Ink Character Recognition reads the special magnetic numbers at a cheque's bottom for fast clearing (the 9-digit MICR code). Barcodes are optical (supermarkets); fingerprints are biometric.",
+    "tag": "io",
+    "deck": "ck"
+   },
+   {
+    "q": "RAM vs ROM?",
+    "options": [
+     "Both volatile",
+     "Volatile vs non-volatile",
+     "Both permanent",
+     "Same speed"
+    ],
+    "answer": 1,
+    "explain": "RAM is working memory — fast but VOLATILE (wiped on power-off). ROM is NON-volatile firmware (holds BIOS/boot code). That's why unsaved work dies in a power cut but the PC still boots.",
+    "tag": "memory",
     "deck": "ck"
    },
    {
@@ -628,20 +862,20 @@
      "and a musician"
     ],
     "answer": 3,
-    "explain": "Two nouns, same person → article once: 'a doctor and musician'.",
+    "explain": "Rule: when two nouns describe the SAME person and are joined by 'and', the article comes only before the first noun. Here the friend is one person who is both doctor and musician, so the second 'a' is wrong. Correct sentence: '...is now a doctor and musician.' If they were two different people, both articles would stay.",
     "tag": "article",
     "deck": "english"
    },
    {
-    "q": "Choose correct: ___ several disputes, the couple stayed together.",
+    "q": "Choose the correct sentence.",
     "options": [
-     "Despite of",
-     "Despite",
-     "In spite",
-     "Although of"
+     "Despite of several disputes, they stayed.",
+     "Despite several disputes, they stayed.",
+     "Despite of the fact they stayed.",
+     "Although of disputes they stayed."
     ],
     "answer": 1,
-    "explain": "Despite never takes 'of'. (In spite OF is correct.)",
+    "explain": "'Despite' is already a complete preposition and never takes 'of' — the error 'despite of' is a classic trap. Its cousin 'in spite' DOES need 'of' ('in spite of disputes'). 'Although' is a conjunction, so 'although of' is never correct.",
     "tag": "preposition",
     "deck": "english"
    },
@@ -654,20 +888,33 @@
      "economize"
     ],
     "answer": 1,
-    "explain": "'a number of' + plural noun.",
+    "explain": "'A number of' always takes a PLURAL noun — it means 'several'. Contrast with 'the number of', which takes a singular verb ('The number of cases IS rising'). Also, only the noun 'economies' fits; 'economical' is an adjective.",
     "tag": "grammar",
     "deck": "english"
    },
    {
-    "q": "All pens are books. Some books are chairs. 'Some pens are chairs'?",
+    "q": "Antonym of CONSTANT?",
     "options": [
-     "Definitely true",
-     "Definitely false",
-     "Either 'some are' or 'none is'",
-     "Cannot say"
+     "fitful",
+     "perpetual",
+     "prevalent",
+     "entrust"
     ],
-    "answer": 2,
-    "explain": "All+Some = no definite; Some/No pair gives either-or.",
+    "answer": 0,
+    "explain": "'Constant' = steady, unchanging. 'Fitful' = irregular, starting and stopping — the direct opposite. Watch out: 'perpetual' (never-ending) is a SYNONYM of constant, and 'prevalent' means widespread, which is unrelated.",
+    "tag": "vocab",
+    "deck": "english"
+   },
+   {
+    "q": "All pens are books. Some books are chairs. Valid conclusion?",
+    "options": [
+     "Some pens are chairs (definite)",
+     "Either 'some pens are chairs' or 'no pen is chair'",
+     "All pens are chairs",
+     "No conclusion possible"
+    ],
+    "answer": 1,
+    "explain": "All + Some yields NO definite conclusion (the middle term 'books' isn't distributed to link pens to chairs). But 'Some pens are chairs' and 'No pen is a chair' are complementary (same subject-predicate, one Some one No) — one must be true. Hence either-or.",
     "tag": "syllogism",
     "deck": "reasoning"
    },
@@ -680,25 +927,25 @@
      "Nothing definite"
     ],
     "answer": 0,
-    "explain": "Only-a-few = some + some-not, both true.",
+    "explain": "'Only a few' is special: it guarantees BOTH 'Some Perk are Kitkat' AND 'Some Perk are NOT Kitkat' as definite conclusions. It behaves like Some + Some-not combined — a favourite trap because test-takers treat it as plain 'some'.",
     "tag": "syllogism",
     "deck": "reasoning"
    },
    {
-    "q": "CAT → DBU. Pattern?",
+    "q": "CAT → DBU. DOG → ?",
     "options": [
-     "+1 each letter",
-     "+2 each letter",
-     "Reverse",
-     "Vowel shift"
+     "EPH",
+     "DPH",
+     "EOH",
+     "CNF"
     ],
     "answer": 0,
-    "explain": "C+1=D, A+1=B, T+1=U.",
+    "explain": "Each letter shifts +1: C→D, A→B, T→U. Apply to DOG: D→E, O→P, G→H = EPH. First check constant shifts (+1/+2) before trying complex patterns.",
     "tag": "coding",
     "deck": "reasoning"
    },
    {
-    "q": "Ravi: 'She is my grandfather's only son's daughter.' She is?",
+    "q": "'She is my grandfather's only son's daughter.' She is?",
     "options": [
      "Sister",
      "Mother",
@@ -706,7 +953,7 @@
      "Cousin"
     ],
     "answer": 0,
-    "explain": "Grandfather's only son = father; father's daughter = sister.",
+    "explain": "Work inside-out: grandfather's only son = my father. Father's daughter = my sister (or self if the speaker is female — with 'she', it's sister). Inside-out decoding prevents the classic mistake of jumping to aunt.",
     "tag": "blood",
     "deck": "reasoning"
    },
@@ -719,8 +966,8 @@
      "Rs.503.8"
     ],
     "answer": 1,
-    "explain": "SI=1920. CI=1920×1.1×1.1−1920=403.2.",
-    "tag": "SI-CI",
+    "explain": "Step 1 — SI from X: 4800 × 20% × 2 = Rs.1920. Step 2 — this 1920 becomes principal for Y: amount = 1920 × 1.1 × 1.1 = Rs.2323.2. Step 3 — CI interest = amount − principal = 2323.2 − 1920 = Rs.403.2. Trap: 384 is 20% of 1920 (one year's interest), not two years compounded.",
+    "tag": "si-ci",
     "deck": "quant"
    },
    {
@@ -732,12 +979,12 @@
      "40 m/s"
     ],
     "answer": 1,
-    "explain": "600/(36−16)=30 m/s. Length=480m.",
+    "explain": "The extra 20 seconds (36−16) cover exactly the 600m platform, so speed = 600/20 = 30 m/s. Train length = 30×16 = 480m. Shortcut for these Qs: speed = platform length ÷ (platform time − pole time).",
     "tag": "train",
     "deck": "quant"
    },
    {
-    "q": "Series: 3, 29, 127, 345, ? (n³+2, odd n)",
+    "q": "Series: 3, 29, 127, 345, ? (odd cubes +2)",
     "options": [
      "511",
      "731",
@@ -745,7 +992,7 @@
      "1333"
     ],
     "answer": 1,
-    "explain": "9³+2=731. Odd cubes +2.",
+    "explain": "Each term is an odd cube plus 2: 1³+2=3, 3³+2=29, 5³+2=127, 7³+2=345, so 9³+2=729+2=731. Clue: numbers just above perfect cubes (127, 345) scream 'cube ± constant'.",
     "tag": "series",
     "deck": "quant"
    }
@@ -758,7 +1005,7 @@
   "track": "mains",
   "questions": [
    {
-    "q": "IRDAI HQ?",
+    "q": "IRDAI headquarters?",
     "options": [
      "Mumbai",
      "Delhi",
@@ -766,25 +1013,25 @@
      "Chennai"
     ],
     "answer": 2,
-    "explain": "Insurance regulator sits in Hyderabad (1999).",
+    "explain": "The Insurance Regulatory and Development Authority of India sits in Hyderabad (set up 1999). Trap options: RBI and SEBI are in Mumbai; PFRDA in Delhi. Regulator-HQ pairs are favourite static Qs.",
     "tag": "regulator",
     "deck": "ga"
    },
    {
     "q": "PMSBY cover + premium?",
     "options": [
-     "2L, ~Rs.20/yr",
-     "2L, ~Rs.436/yr",
-     "5L, free",
-     "1L, Rs.100/yr"
+     "Rs.2L, ~Rs.20/yr",
+     "Rs.2L, ~Rs.436/yr",
+     "Rs.5L, free",
+     "Rs.1L, Rs.100/yr"
     ],
     "answer": 0,
-    "explain": "Suraksha = accident, Rs.20. JJBY (life) = Rs.436.",
+    "explain": "Suraksha = ACCIDENT cover Rs.2L at ~Rs.20/year, age 18–70. Don't confuse with PMJJBY (LIFE cover Rs.2L at ~Rs.436, age 18–50). Pair them: Suraksha-20-accident vs Jeevan-436-life.",
     "tag": "scheme",
     "deck": "ga"
    },
    {
-    "q": "DICGC deposit insurance per depositor/bank?",
+    "q": "DICGC cover per depositor per bank?",
     "options": [
      "Rs.1L",
      "Rs.3L",
@@ -792,38 +1039,51 @@
      "Rs.10L"
     ],
     "answer": 2,
-    "explain": "Rs.5 lakh (raised 2020 from 1L).",
+    "explain": "Deposit Insurance (RBI subsidiary) covers Rs.5 lakh per depositor per bank — raised from Rs.1L in 2020 after the PMC crisis. Covers all commercial + cooperative banks.",
     "tag": "banking",
     "deck": "ga"
    },
    {
-    "q": "Third-party motor insurance is…?",
+    "q": "Third-party motor insurance is?",
     "options": [
      "Optional",
-     "Mandatory (MV Act)",
+     "Mandatory under MV Act",
      "Only for trucks",
-     "Banned"
+     "Being phased out"
     ],
     "answer": 1,
-    "explain": "Mandatory; covers third-party injury/damage.",
+    "explain": "Compulsory under the Motor Vehicles Act: every vehicle must cover third-party injury/damage. It never covers your OWN damage — that needs a comprehensive/own-damage add-on.",
     "tag": "motor",
     "deck": "ga"
    },
    {
     "q": "Bima Sugam is?",
     "options": [
-     "Rural product",
-     "Online marketplace",
-     "Agent force",
+     "Rural bundled product",
+     "Online insurance marketplace",
+     "Agent training force",
      "Claim form"
     ],
     "answer": 1,
-    "explain": "IRDAI's online marketplace; Vistar=rural, Vahak=distribution.",
+    "explain": "IRDAI's trio: Bima SUGAM = online marketplace (compare/buy like Amazon), Bima VISTAR = rural bundled product, Bima VAHAK = women-led distribution force. Part of 'Insurance for all by 2047'.",
     "tag": "current",
     "deck": "ga"
    },
    {
-    "q": "(1011)₂ = ? decimal",
+    "q": "Census 2011 literacy?",
+    "options": [
+     "65%",
+     "70%",
+     "74.04%",
+     "80%"
+    ],
+    "answer": 2,
+    "explain": "74.04% literacy, sex ratio 943, density 382, population 121 crore. Cluster to memorize: 121cr–74%–943–382. (Next census delayed — check current affairs.)",
+    "tag": "static",
+    "deck": "ga"
+   },
+   {
+    "q": "(1011)₂ in decimal?",
     "options": [
      "9",
      "11",
@@ -831,51 +1091,51 @@
      "15"
     ],
     "answer": 1,
-    "explain": "8+0+2+1=11.",
+    "explain": "Weight each bit right-to-left as 1,2,4,8: 1×8 + 0×4 + 1×2 + 1×1 = 8+0+2+1 = 11. Always expand positional values instead of guessing.",
     "tag": "binary",
     "deck": "ck"
    },
    {
-    "q": "$A$1 in Excel?",
+    "q": "$A$1 in Excel is?",
     "options": [
      "Fully relative",
-     "Absolute",
-     "Row fixed only",
+     "Absolute reference",
+     "Row-fixed only",
      "Invalid"
     ],
     "answer": 1,
-    "explain": "$ locks. A$1=row fixed, $A1=col fixed.",
+    "explain": "$ locks: $A$1 locks both (absolute — never shifts when copied), A$1 locks only the row, $A1 only the column, A1 fully relative. Test: dragging $A$1 down keeps pointing at A1.",
     "tag": "excel",
     "deck": "ck"
    },
    {
     "q": "SMTP vs POP3?",
     "options": [
-     "Both receive",
+     "Both receive mail",
      "Send vs receive",
-     "Both send",
+     "Both send mail",
      "Chat protocols"
     ],
     "answer": 1,
-    "explain": "SMTP sends (587); POP3/IMAP receive.",
+    "explain": "SMTP (port 587/25) SENDS mail out; POP3 (110) or IMAP (143) RECEIVE it. Memory hook: S=Send. IMAP syncs across devices; POP3 downloads then usually deletes from server.",
     "tag": "email",
     "deck": "ck"
    },
    {
-    "q": "Virus vs Worm?",
+    "q": "Virus vs worm?",
     "options": [
-     "Same",
+     "Same thing",
      "Virus needs host+action; worm self-spreads",
-     "Worm needs host",
+     "Worm needs a host",
      "Neither spreads"
     ],
     "answer": 1,
-    "explain": "Worm self-propagates over networks.",
+    "explain": "A virus attaches to a host file and needs you to run it; a worm is standalone and crawls networks by itself (e.g. WannaCry). Trojan = disguised as legit software; ransomware encrypts for money; spyware steals silently.",
     "tag": "security",
     "deck": "ck"
    },
    {
-    "q": "1 GB = ?",
+    "q": "1 GB equals?",
     "options": [
      "1000 MB",
      "1024 MB",
@@ -883,12 +1143,25 @@
      "100 MB"
     ],
     "answer": 1,
-    "explain": "1024-based: 1GB=1024MB.",
+    "explain": "Memory uses binary: 1 KB=1024 B, 1 MB=1024 KB, 1 GB=1024 MB (2^10 each step). Telecom/storage marketing sometimes uses 1000, but exams expect 1024. 1024 KB would be just 1 MB.",
     "tag": "memory",
     "deck": "ck"
    },
    {
-    "q": "She ___ in hilly areas since her childhood. (lives / has been living)",
+    "q": "UPI vs IFSC?",
+    "options": [
+     "Both branch codes",
+     "Instant payments vs branch ID",
+     "Card types",
+     "Loan schemes"
+    ],
+    "answer": 1,
+    "explain": "UPI (by NPCI) = instant mobile payments via VPA. IFSC = 11-character branch identifier (4 bank code + 0 + 6 branch) used in NEFT/RTGS/IMPS transfers. One moves money, one addresses the branch.",
+    "tag": "banking-tech",
+    "deck": "ck"
+   },
+   {
+    "q": "She ___ in hilly areas since her childhood.",
     "options": [
      "lives",
      "has been living",
@@ -896,7 +1169,7 @@
      "will live"
     ],
     "answer": 1,
-    "explain": "'since' + starting point needs present perfect continuous.",
+    "explain": "'Since + a starting point in the past' (her childhood) with an action continuing to now always needs the present perfect continuous: has/have + been + verb-ing. So 'has been living'. Simple present 'lives' only suits habits with no 'since' clause, e.g. 'She lives in Shimla.'",
     "tag": "tense",
     "deck": "english"
    },
@@ -909,7 +1182,7 @@
      "declining"
     ],
     "answer": 1,
-    "explain": "After/when/until + present tense for future events.",
+    "explain": "After time conjunctions (after, when, until, if, as soon as), use the PRESENT tense even when the main clause is future. The main clause already carries the future ('will conduct'), so 'will decline' repeats it wrongly. Correct: '...after cases decline.'",
     "tag": "tense",
     "deck": "english"
    },
@@ -922,7 +1195,7 @@
      "intermittent"
     ],
     "answer": 0,
-    "explain": "Sustained = continued/suffered → persisted.",
+    "explain": "'Sustained' here means suffered/endured over time. 'Persisted' (continued to exist) is the closest match. 'Affiliated' means attached to an organisation, 'rendered' means provided/gave, and 'intermittent' (on-and-off) is nearly an antonym.",
     "tag": "vocab",
     "deck": "english"
    },
@@ -931,16 +1204,16 @@
     "options": [
      "All pens are copies",
      "All copies are pens",
-     "Some copies are not pens",
-     "No pen is copy"
+     "No pen is a copy",
+     "Some pens are not copies"
     ],
     "answer": 1,
-    "explain": "Only A are B → All B are A (reversed!).",
+    "explain": "'Only A are B' REVERSES the All-statement: it means All B are A (every copy is a pen, but non-pens can never be copies). So 'all pens are copies' is false — pens need not be copies. Draw it: Copies circle fully inside Pens circle.",
     "tag": "syllogism",
     "deck": "reasoning"
    },
    {
-    "q": "A ≥ B > C = D ≤ E. Is A > D?",
+    "q": "A ≥ B > C = D. Is A > D?",
     "options": [
      "Yes",
      "No",
@@ -948,25 +1221,51 @@
      "Only if E is large"
     ],
     "answer": 0,
-    "explain": "≥ combined with > gives >. Chain holds.",
+    "explain": "Collapse the chain from A to D: A ≥ B (at least as big), B > C (strictly bigger), C = D (equal). ≥ combined with > gives strict >: A > D definitely. Rule: one strict link anywhere makes the whole chain strict; '=' links are neutral.",
     "tag": "inequality",
     "deck": "reasoning"
    },
    {
-    "q": "NOT an OS function?",
+    "q": "Opposite-letter code (A↔Z). Opposite of M?",
     "options": [
-     "Memory mgmt",
-     "Scheduling",
-     "Word processing",
-     "File mgmt"
+     "L",
+     "M",
+     "N",
+     "O"
     ],
     "answer": 2,
-    "explain": "Word processing is an application.",
+    "explain": "Opposite pairs sum to 27 (A=1+Z=26, B=2+Y=25...). M=13 needs 14=N. Shortcut: opposites are mirror positions — M (13th from start) ↔ N (13th from end).",
+    "tag": "coding",
+    "deck": "reasoning"
+   },
+   {
+    "q": "Facing north, turn 90° right then 180° left. Facing?",
+    "options": [
+     "East",
+     "West",
+     "North",
+     "South"
+    ],
+    "answer": 1,
+    "explain": "Track step by step: North →(90° right)→ East →(180° left)→ West. A 180° turn always lands exactly opposite, so from East you face West. Draw a small compass for multi-turn Qs.",
+    "tag": "direction",
+    "deck": "reasoning"
+   },
+   {
+    "q": "Which is NOT an OS function?",
+    "options": [
+     "Memory management",
+     "Scheduling",
+     "Word processing",
+     "File management"
+    ],
+    "answer": 2,
+    "explain": "The OS manages hardware resources: processes (scheduling), memory, files, devices, security. Word processing is an APPLICATION running on top (like MS Word on Windows). Test: if users install it separately, it's not the OS.",
     "tag": "os",
     "deck": "it"
    },
    {
-    "q": "Minimum avg waiting time scheduling?",
+    "q": "Minimum average waiting-time scheduling?",
     "options": [
      "FCFS",
      "SJF",
@@ -974,7 +1273,7 @@
      "LIFO"
     ],
     "answer": 1,
-    "explain": "Shortest Job First is optimal on average.",
+    "explain": "Shortest Job First always picks the quickest pending job, minimizing average wait (provably optimal for known burst times). FCFS suffers the convoy effect (long job blocks all); Round Robin is fair but slower on average. Preemptive SJF = SRTF.",
     "tag": "os",
     "deck": "it"
    },
@@ -982,25 +1281,25 @@
     "q": "BCNF vs 3NF?",
     "options": [
      "BCNF weaker",
-     "BCNF⇒3NF",
+     "BCNF implies 3NF",
      "Unrelated",
-     "3NF⇒BCNF"
+     "3NF implies BCNF"
     ],
     "answer": 1,
-    "explain": "BCNF is stricter; every BCNF table is in 3NF.",
+    "explain": "Normal forms nest strictly: 1NF ⊂ 2NF ⊂ 3NF ⊂ BCNF. Every BCNF table is automatically in 3NF (every determinant is a superkey), but a 3NF table can still violate BCNF. Stronger form ⇒ all weaker ones hold.",
     "tag": "dbms",
     "deck": "it"
    },
    {
     "q": "WHERE vs HAVING?",
     "options": [
-     "Same",
-     "Rows-before vs groups-after",
+     "Same thing",
+     "Rows-before vs groups-after grouping",
      "Only HAVING filters",
-     "Neither aggregates"
+     "Neither uses aggregates"
     ],
     "answer": 1,
-    "explain": "WHERE pre-grouping; HAVING post-GROUP BY.",
+    "explain": "WHERE filters individual ROWS before grouping (can't use aggregates); HAVING filters GROUPS after GROUP BY (works with COUNT/SUM/AVG). Example: WHERE year=2024 ... GROUP BY branch HAVING COUNT(*)>5.",
     "tag": "sql",
     "deck": "it"
    },
@@ -1013,8 +1312,21 @@
      "ARP"
     ],
     "answer": 1,
-    "explain": "TCP: ACKs, retransmission, ordering.",
+    "explain": "TCP is connection-oriented: sequence numbers, ACKs, retransmission and ordering guarantee every byte arrives — exactly what document uploads need. UDP skips all that for speed (live video, DNS, gaming) and may lose data. Reliability ⇒ TCP.",
     "tag": "networks",
+    "deck": "it"
+   },
+   {
+    "q": "Bulk-data encryption: AES or RSA?",
+    "options": [
+     "RSA",
+     "AES",
+     "SHA-256",
+     "MD5"
+    ],
+    "answer": 1,
+    "explain": "AES (symmetric, one shared key) is ~1000× faster — used for the actual data. RSA (asymmetric, key pair) only exchanges keys and signs. SHA-256/MD5 are HASHES (one-way fingerprints), not encryption at all. Real systems are hybrid: RSA handshake, AES session (that's HTTPS).",
+    "tag": "crypto",
     "deck": "it"
    }
   ]
