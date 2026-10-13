@@ -1,0 +1,4 @@
+[
+  { "label": "Topic name", "query": "youtube search words for a playlist" },
+  { "label": "Specific video", "videoId": "YOUTUBE_ID_HERE" }
+]

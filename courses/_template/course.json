@@ -1,0 +1,12 @@
+{
+  "id": "my-course",
+  "title": "My Course",
+  "tagline": "One line on what this course leads to",
+  "accent": "#4f46e5",
+  "exam": { "label": "Exam • date", "date": "2027-01-01T09:00:00", "sub": "Countdown sub-line" },
+  "dailyGoal": 20,
+  "tracks": [
+    { "id": "foundations", "title": "Foundations", "desc": "What this track covers" }
+  ],
+  "files": { "decks": "decks.json", "quizzes": "quizzes.json", "videos": "videos.json", "plan": "plan.md", "resources": "resources.md" }
+}

@@ -1,0 +1,26 @@
+[
+ {
+  "label": "Quant",
+  "query": "NICL AO quant simplification DI"
+ },
+ {
+  "label": "Reasoning",
+  "query": "NICL AO reasoning puzzles seating"
+ },
+ {
+  "label": "English",
+  "query": "NICL AO English comprehension error detection"
+ },
+ {
+  "label": "Insurance GA",
+  "query": "IRDAI insurance awareness government schemes"
+ },
+ {
+  "label": "Computers",
+  "query": "computer fundamentals MS Office IBPS"
+ },
+ {
+  "label": "IT",
+  "query": "DBMS computer networks operating system gate"
+ }
+]

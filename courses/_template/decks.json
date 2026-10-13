@@ -1,0 +1,17 @@
+[
+  {
+    "id": "deck-id",
+    "title": "Deck title",
+    "desc": "What this deck drills",
+    "track": "foundations",
+    "cards": [
+      {
+        "q": "Question text?",
+        "options": ["Correct answer", "Wrong one", "Wrong two", "Wrong three"],
+        "answer": 0,
+        "explain": "Why — the rule in one or two lines.",
+        "tag": "topic"
+      }
+    ]
+  }
+]

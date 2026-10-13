@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kaizen — Better than yesterday</title>
+<meta name="description" content="Kaizen: personal progress, focus sessions, friends and friendly competition.">
+<meta name="theme-color" content="#14120f">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="errToast" class="hidden"></div>
+<div id="app">
+
+  <header class="topbar">
+    <div class="brand">Kaizen <span class="tagline">Better than yesterday.</span></div>
+    <div class="top-stats">
+      <div class="stat"><b id="xpTop">0</b> <span>XP today</span></div>
+      <div class="stat"><b id="streakTop">0</b> <span>day streak</span></div>
+    </div>
+  </header>
+
+  <nav class="tabs" id="mainTabs">
+    <button class="tab active" data-tab="home">Home</button>
+    <button class="tab" data-tab="paths">Paths</button>
+    <button class="tab focus-tab" data-tab="focus">Focus</button>
+    <button class="tab" data-tab="social">Social <span id="socDot" class="dot-badge hidden"></span></button>
+    <button class="tab" data-tab="profile">Profile</button>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <section id="tab-home" class="panel active">
+      <p class="kicker" id="todayDate"></p>
+      <h1 id="greet">Good morning.</h1>
+      <p class="lede">Every session counts.</p>
+
+      <div class="card today-card">
+        <div class="card-h"><span>Today</span><span class="muted">Lv <b id="levelHome">1</b></span></div>
+        <div class="today-nums">
+          <div><b id="focusToday">0m</b><span>Focus time</span></div>
+          <div><b id="xpToday">0</b><span>XP earned</span></div>
+        </div>
+        <div class="goal"><div class="goal-bar"><i id="goalFill"></i></div>
+        <div class="muted"><b id="goalDone">0</b>/<span id="goalTotal">20</span> daily goal</div></div>
+        <div class="muted"><span id="streakHome">0</span>-day streak</div>
+      </div>
+
+      <div class="card">
+        <div class="card-h">Reflection</div>
+        <p id="insightTxt" style="margin:0">Answer a few questions and I will tell you what to revise.</p>
+      </div>
+
+      <div class="card" id="continueCard">
+        <div class="card-h">Continue</div>
+        <p class="muted" id="continueTxt">Pick a path to begin.</p>
+        <div class="row"><button id="continueBtn" class="btn primary">Resume practice</button></div>
+      </div>
+
+      <h2>Your paths</h2>
+      <div id="homePaths"></div>
+
+      <div class="card" id="duoMiniCard">
+        <div class="card-h">Study room</div>
+        <div id="duoMini" class="muted">Not connected.</div>
+      </div>
+
+      <div class="row-between"><h2>Friends in motion</h2><button class="linkbtn" data-goto="social">See all</button></div>
+      <div id="friendStrip" class="strip"></div>
+      <p class="muted center tiny" id="activeCount"></p>
+
+      <div class="row-between"><h2>Friends' activity</h2><span class="live tiny">Live</span></div>
+      <div id="homeFeed" class="feed"></div>
+    </section>
+
+    <!-- PATHS -->
+    <section id="tab-paths" class="panel">
+      <p class="kicker">Paths</p>
+      <h1>Your journeys</h1>
+      <div class="seg" id="pathFilter">
+        <button class="seg-btn active" data-f="all">All</button>
+        <button class="seg-btn" data-f="active">Active</button>
+        <button class="seg-btn" data-f="done">Completed</button>
+      </div>
+      <div id="pathList"></div>
+      <div id="pathDetail" class="hidden"></div>
+    </section>
+
+    <!-- FOCUS -->
+    <section id="tab-focus" class="panel">
+      <p class="kicker">Focus</p>
+      <h1 id="focusTitle">What will you work on?</h1>
+      <div id="focusLanding">
+        <div class="card" id="resumeCard">
+          <div class="card-h">Continue where you left off</div>
+          <p class="muted" id="resumeTxt">—</p>
+          <div class="row"><button id="resumeBtn" class="btn primary">Resume learning</button></div>
+        </div>
+        <h2>Start something new</h2>
+        <div class="row wrap" id="focusActs">
+          <button class="btn" data-start="flash">Flashcards</button>
+          <button class="btn" data-start="quiz">Quiz</button>
+          <button class="btn" data-start="mock">Mock</button>
+          <button class="btn" data-start="timer">Timed focus</button>
+        </div>
+        <div class="card hidden" id="focusPick">
+          <div class="card-h">Choose material</div>
+          <div class="row wrap" id="focusPickRow"></div>
+        </div>
+      </div>
+      <div id="focusActive" class="hidden">
+        <div class="card center">
+          <div class="muted" id="sessLabel">Session</div>
+          <div class="sess-timer" id="sessTimer">00:00</div>
+          <div class="muted" id="sessState">Session in progress</div>
+          <div class="muted"><b id="sessXP">+0 XP</b> earned so far</div>
+          <div class="row"><button id="pauseBtn" class="btn">Pause</button>
+          <button id="finishBtn" class="btn primary">Finish session</button></div>
+        </div>
+        <div class="card" id="sessWork"></div>
+        <div class="card">
+          <div class="card-h">Friends working with you</div>
+          <div id="sessFriends" class="muted">No one else is in session.</div>
+        </div>
+      </div>
+      <div id="focusSummary" class="hidden"></div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section id="tab-social" class="panel">
+      <p class="kicker">Social</p>
+      <h1>Alongside you</h1>
+      <div class="seg" id="socSeg">
+        <button class="seg-btn active" data-s="activity">Activity</button>
+        <button class="seg-btn" data-s="friends">Friends</button>
+        <button class="seg-btn" data-s="board">Ranks</button>
+        <button class="seg-btn" data-s="chlg">Challenges</button>
+      </div>
+      <div id="soc-activity"><div id="feed" class="feed"></div></div>
+      <div id="soc-friends" class="hidden"><div id="friendList"></div></div>
+      <div id="soc-board" class="hidden">
+        <div class="seg" id="boardSeg">
+          <button class="seg-btn active" data-b="week">Week</button>
+          <button class="seg-btn" data-b="day">Day</button>
+          <button class="seg-btn" data-b="focus">Focus time</button>
+          <button class="seg-btn" data-b="consist">Consistency</button>
+        </div>
+        <div id="boardBody"></div>
+      </div>
+      <div id="soc-chlg" class="hidden">
+        <div class="card">
+          <div class="card-h">New challenge</div>
+          <div class="row"><select id="chType">
+            <option value="questions">Most questions this week</option>
+            <option value="minutes">Most focus minutes this week</option>
+            <option value="team">Team target: questions</option>
+          </select><input id="chTarget" type="number" value="100" min="10" style="max-width:110px"></div>
+          <div class="row"><button id="chCreate" class="btn primary">Start challenge</button></div>
+        </div>
+        <div id="chList"></div>
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="tab-profile" class="panel">
+      <p class="kicker">Profile</p>
+      <div class="prof-head">
+        <div class="avatar" id="avatar">K</div>
+        <div><h1 id="profName">You</h1>
+        <p class="muted" id="profSub">Level 1 · 0 XP</p>
+        <p class="quote">“Small steps, every day.”</p></div>
+      </div>
+      <div class="me-grid">
+        <div class="card"><div class="big" id="meTime">0m</div><div class="muted">Focus time</div></div>
+        <div class="card"><div class="big" id="meSess">0</div><div class="muted">Sessions</div></div>
+        <div class="card"><div class="big" id="meAcc">–</div><div class="muted">Avg accuracy</div></div>
+        <div class="card"><div class="big" id="meStreak">0</div><div class="muted">Best streak</div></div>
+      </div>
+      <h2>Mastery</h2>
+      <div id="courseBars"></div>
+      <h2>Activity</h2>
+      <div class="card"><div id="weekDots" class="streak-row"></div></div>
+      <div class="card"><div class="card-h">Study hours</div><div id="hourChart" class="hchart"></div></div>
+      <h2>Your paths</h2>
+      <div id="profPaths"></div>
+      <h2>Achievements</h2>
+      <div id="badgeGrid" class="badge-grid"></div>
+      <h2>Privacy</h2>
+      <div class="card">
+        <label class="chk"><input type="checkbox" id="pvActivity"> Show my live activity to my partner</label>
+        <label class="chk"><input type="checkbox" id="pvPaths"> Show my enrolled paths</label>
+        <p class="muted tiny">Durations stay private — only what you're working on is shared, never exact session lengths.</p>
+      </div>
+      <h2>Connection</h2>
+      <div class="card">
+        <div id="authBox">
+          <div class="row"><button id="googleBtn" class="btn primary">Sign in with Google</button></div>
+          <p class="muted tiny">Sign-in keeps you connected on this device and unlocks the shared room.</p>
+        </div>
+        <div id="userBox" class="hidden">
+          <div class="row-between"><div><b id="userName"></b><br><span class="muted tiny" id="userMail"></span></div>
+          <button id="signOutBtn" class="btn">Sign out</button></div>
+        </div>
+        <div class="row"><input id="roomInput" placeholder="Room code (everyone uses the same)" autocapitalize="off" spellcheck="false"></div>
+        <div class="row"><input id="nameInput" placeholder="Display name" maxlength="20"></div>
+        <div class="row"><button id="connectBtn" class="btn primary">Join room</button>
+        <button id="dcBtn" class="btn hidden">Leave</button></div>
+        <p class="muted tiny" id="duoStatus">Offline — progress stays on this device. See SETUP.md.</p>
+        <div class="row"><button id="waveBtn" class="btn hidden">Wave to the room 👋</button></div>
+      </div>
+      <div class="card" id="syncCard">
+        <div class="card-h">Sync status <span class="muted tiny" id="syncDot"></span></div>
+        <div class="tiny muted" id="syncLines">Not connected.</div>
+      </div>
+      <div class="card hidden" id="syncHelp">
+        <div class="card-h">Fix sync access</div>
+        <p class="muted tiny">Firebase is reachable but refusing reads/writes. In <b>console.firebase.google.com → your project → Build → Realtime Database → Rules</b>, replace everything with:</p>
+        <pre id="rulesPre">{
+  "rules": {
+    "rooms": {
+      "$code": { ".read": "auth != null", ".write": "auth != null" }
+    }
+  }
+}</pre>
+        <div class="row"><button id="copyRulesBtn" class="btn">Copy rules</button></div>
+        <p class="muted tiny">Then Publish, and make sure you're signed in above (Google button). Rules can take ~1 min to apply — then tap Join room again.</p>
+      </div>
+      <div class="row">
+        <button id="exportBtn" class="btn">Export data</button>
+        <button id="resetBtn" class="btn danger">Reset all</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot muted">Kaizen — a little better, every day. <span id="appVer"></span></footer>
+</div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="config.gen.js"></script>
+<script src="config.js"></script>
+<script src="pack.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

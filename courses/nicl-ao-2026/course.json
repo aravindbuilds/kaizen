@@ -1,0 +1,13 @@
+{
+  "id": "nicl-ao-2026",
+  "title": "NICL AO 2026",
+  "tagline": "Administrative Officer • Prelims 17 Nov → Mains 22 Dec",
+  "accent": "#4f46e5",
+  "exam": { "label": "Prelims • 17 November 2026", "date": "2026-11-17T09:00:00", "sub": "Mains 22 Dec 2026" },
+  "dailyGoal": 20,
+  "tracks": [
+    { "id": "prelims", "title": "Prelims", "desc": "English 30 • Reasoning 35 • Quant 35 • 60 min" },
+    { "id": "mains", "title": "Mains", "desc": "GA • Computer Knowledge • Technical IT • Descriptive" }
+  ],
+  "files": { "decks": "decks.json", "quizzes": "quizzes.json", "videos": "videos.json", "plan": "plan.md", "resources": "resources.md" }
+}
