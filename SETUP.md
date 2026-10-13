@@ -43,6 +43,11 @@ The browser cannot read `.env`. Something must turn values into `config.gen.js` 
 ## 5. Everyone joins (sign-in persists)
 Each person: Profile → Connection → **Sign in with Google** → room code → Join room. Sign-in persists on the device (survives reloads); signing out leaves the room but keeps personal progress.
 
+**Mobile notes (sign-in fails on phone but works on PC?):**
+- Open Kaizen in the **real browser app** (Safari on iPhone, Chrome on Android) — NOT inside Instagram/WhatsApp/Gmail's in-app browser, which blocks Google sign-in entirely. The app uses redirect sign-in on mobile automatically.
+- If storage is blocked, the app signs you in for the current tab only and says so — it still works, just sign in again next visit.
+- Your Vercel domain must be in Firebase console → Authentication → Settings → **Authorized domains** (localhost is pre-authorized for testing).
+
 ## 6. Deploy on Vercel WITHOUT the key in git
 At build time Vercel generates `config.gen.js` from env vars (see `tools/gen-config.mjs` + `vercel.json` buildCommand). The committed `config.js` holds only nulls.
 1. Vercel → Project → **Settings → Environment Variables**, add (copy exact values from Firebase console → Project settings):

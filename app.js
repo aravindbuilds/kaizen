@@ -1,10 +1,12 @@
 /* Kaizen — social progression platform.
    Home · Paths · Focus · Social · Profile. Offline-first; Firebase duo sync optional. */
-const APP_V = "2.0";
+const APP_V = "2.3";
+window.__kzStep = "load";
 window.addEventListener("error", e => {
   const t = document.querySelector("#errToast");
   if (t) { const where = (e.error && e.error.stack || "").split("\n")[1] || "";
-    t.textContent = "Something hiccuped: " + (e.message || "unknown error") + " " + where.trim() + " — reload picks up where you left off.";
+    t.textContent = "Something hiccuped: " + (e.message || "unknown error") + " " + where.trim()
+      + " [at: " + (window.__kzStep || "?") + "] — reload picks up where you left off.";
     t.classList.remove("hidden"); clearTimeout(window.__errT);
     window.__errT = setTimeout(() => t.classList.add("hidden"), 12000); }
 });
@@ -52,7 +54,8 @@ function normState(){ S.flags=S.flags||{}; S.badges=S.badges||[]; S.myVids=S.myV
 /* ---------- tiny md ---------- */
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
 function inline(s){ return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
-  .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>'); }
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+  .replace(/(^|[\s(>])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>'); }
 function md(t){ if(!t) return "";
   return t.split("\n").map(line=>{
     if(/^### /.test(line)) return `<h3>${esc(line.slice(4))}</h3>`;
@@ -747,7 +750,10 @@ function connect(){
   if(!room){ $("#duoStatus").textContent="Enter a room code first — everyone uses the same code."; return; }
   if(!cfg().firebaseConfig){ $("#duoStatus").textContent="No backend configured yet — see SETUP.md (5 min). Offline mode continues."; return; }
   const user=authUser();
-  if(!user){ $("#duoStatus").textContent="Sign in with Google first, then join the room."; signIn(); return; }
+  const typedName=(($("#nameInput").value||"").trim().slice(0,20));
+  if(!user){ // remember intent across a redirect-based sign-in
+    DUO={room,name:typedName,uid:"",on:!!room}; store.save(LS_DUO,DUO);
+    $("#duoStatus").textContent="Sign in with Google first, then join the room."; signIn(); return; }
   const name=(($("#nameInput").value||"").trim().slice(0,20))||user.displayName||"Someone";
   try{
     DUO={room,name,uid:user.uid,on:true}; S.name=name; S.photo=user.photoURL||"";
@@ -786,14 +792,49 @@ function ensureApp(){
   return firebase.auth();
 }
 function authUser(){ try{ return ensureApp(), firebase.auth().currentUser; }catch{ return null; } }
+let signInBusy=false;
+const IS_MOBILE=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||"");
+async function persistBest(auth){
+  // LOCAL keeps sign-in across restarts; webviews often block storage → degrade gracefully
+  for(const mode of [firebase.auth.Auth.Persistence.LOCAL,
+      firebase.auth.Auth.Persistence.SESSION, firebase.auth.Auth.Persistence.NONE]){
+    try{ await auth.setPersistence(mode); return mode; }catch{}
+  }
+  return null;
+}
 async function signIn(){
+  if(signInBusy) return; signInBusy=true;
+  const btn=$("#googleBtn"); if(btn){ btn.disabled=true; btn.textContent="Signing in…"; }
+  const done=msg=>{ signInBusy=false; if(btn){ btn.disabled=false; btn.textContent="Sign in with Google"; }
+    if(msg) $("#duoStatus").textContent=msg; };
   try{
+    window.__kzStep="signin-start";
     const auth=ensureApp();
-    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL); // stays signed in (cookies/storage)
+    const mode=await persistBest(auth);
+    window.__kzStep="signin-persist:"+mode;
+    if(mode==="none"||mode===null)
+      $("#duoStatus").textContent="Note: this browser blocks storage — sign-in will last this tab only. Prefer Safari/Chrome app.";
     const prov=new firebase.auth.GoogleAuthProvider();
-    try{ await auth.signInWithPopup(prov); }
-    catch(e){ if(e.code==="auth/popup-blocked"||e.code==="auth/cancelled-popup-request") await auth.signInWithRedirect(prov); else throw e; }
-  }catch(e){ $("#duoStatus").textContent="Sign-in failed: "+e.message; }
+    if(IS_MOBILE){ window.__kzStep="signin-redirect"; await auth.signInWithRedirect(prov); return done(); }
+    try{ window.__kzStep="signin-popup"; await auth.signInWithPopup(prov); window.__kzStep="signin-popup-ok"; }
+    catch(e){
+      if(e.code==="auth/popup-blocked"||e.code==="auth/popup-closed-by-user"){ window.__kzStep="signin-redirect"; await auth.signInWithRedirect(prov); return done(); }
+      if(e.code==="auth/cancelled-popup-request"){ return done("Sign-in already in progress — finish the popup."); }
+      if(e.code==="auth/operation-not-supported-in-this-environment"){
+        $("#duoStatus").textContent="This in-app browser can't sign in — open kaizen in Safari/Chrome directly, then sign in.";
+        return done();
+      }
+      throw e;
+    }
+    done();
+  }catch(e){
+    let msg="Sign-in failed: "+(e.message||e);
+    if(String(e.code||"").includes("unauthorized-domain"))
+      msg+=" — add THIS domain ("+location.hostname+") in Firebase console → Authentication → Settings → Authorized domains.";
+    if(String(e.code||"").includes("invalid-api-key")||String(e.message||"").includes("api-key"))
+      msg+=" — the API key in Vercel env vars looks wrong (no quotes/spaces).";
+    done(msg);
+  }
 }
 async function signOut(){
   try{ await ensureApp().signOut(); }catch{}
@@ -862,13 +903,18 @@ function renderAll(){ renderTop(); renderHome(); }
       if(!firebase.apps.length) firebase.initializeApp(c.firebaseConfig);
       DB=firebase.database();
       const auth=firebase.auth();
-      auth.getRedirectResult().catch(()=>{});
-      auth.onAuthStateChanged(u=>{
+      auth.getRedirectResult()
+        .then(res=>{ if(res&&res.user){ window.__kzStep="redirect-ok"; } })
+        .catch(e=>{ window.__kzStep="redirect-err";
+          $("#duoStatus").textContent="Sign-in return failed: "+(e.message||e); });
+      auth.onAuthStateChanged(u=>{ try{
+        window.__kzStep="auth-changed:"+(u?"signed-in":"signed-out");
         refreshAuthUI();
         if(u){ if(!S.name){ S.name=u.displayName||""; S.photo=u.photoURL||""; store.save(LS_MAIN,S); }
           if(DUO.on&&DUO.room&&DUO.uid!==u.uid){ DUO.uid=u.uid; store.save(LS_DUO,DUO); }
           if(DUO.on&&DUO.room&&!roomRef){ S.name=S.name||u.displayName||""; connect(); } }
-      });
+      }catch(e){ window.__kzStep="auth-handler-err";
+        $("#duoStatus").textContent="Signed in, but something stumbled after: "+(e.message||e); } });
     }
   }catch(e){ console.warn("auth init", e); }
   refreshAuthUI();
