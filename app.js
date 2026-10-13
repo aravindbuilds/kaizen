@@ -82,16 +82,16 @@ function md(t){ if(!t) return "";
 /* ---------- courses ---------- */
 let COURSES = {};
 let USING_FALLBACK = false;
-function ingest(id, meta, decks, quizzes, videos, plan, resources){
+function ingest(id, meta, decks, quizzes, videos, guides, plan, resources){
   const byQ = {}; decks.forEach(d=>d.cards.forEach((c,i)=>{ byQ[d.id+"::"+c.q]=i; }));
   quizzes.forEach(q=>q.questions.forEach(qq=>{ if(qq.oi===undefined){
     const did=qq.deck||decks[0]?.id; qq.oi = byQ[did+"::"+qq.q] ?? -1; } }));
-  COURSES[id] = { meta, decks, quizzes, videos, plan, resources };
+  COURSES[id] = { meta, decks, quizzes, videos, guides:guides||[], plan, resources };
 }
 function loadFallback(){
   (window.KAIZEN_FALLBACK?.courses||[]).forEach(p=>{
     if(p.id.startsWith("_")) return;
-    ingest(p.id, p.meta, p.decks, p.quizzes, p.videos, p.plan, p.resources); });
+    ingest(p.id, p.meta, p.decks, p.quizzes, p.videos, p.guides, p.plan, p.resources); });
   if(Object.keys(COURSES).length) USING_FALLBACK = true;
 }
 async function loadCourses(){
@@ -107,6 +107,7 @@ async function loadCourses(){
           JSON.parse(await get(F.decks||"decks.json")||"[]"),
           JSON.parse(await get(F.quizzes||"quizzes.json")||"[]"),
           JSON.parse(await get(F.videos||"videos.json")||"[]"),
+          JSON.parse(await get(F.guides||"guides.json")||"[]"),
           await get(F.plan||"plan.md"), await get(F.resources||"resources.md"));
       }catch(e){ console.warn("pack failed", r.id, e); }
     }
@@ -428,6 +429,7 @@ function openPath(cid){
     <p class="muted">${M.meta.tagline||""} · ${st.sess} sessions · ${st.mins} minutes · accuracy ${acc}%</p>
     <div class="sect">Curriculum</div>${deckRows}
     <div class="row"><button class="btn primary" id="pdGo">Continue path</button></div>
+    <div class="sect">Guides</div><div class="row wrap" id="pdGuides"></div><div id="pdGuideBody"></div>
     <div class="sect">Insights</div><div id="pdInsights"></div>
     <div class="sect">Plan</div><div class="md">${md(M.plan)}</div>
     <div class="sect">Resources</div><div class="md">${md(M.resources)}</div>
@@ -459,6 +461,12 @@ function openPath(cid){
       vw.appendChild(b);
     }
   });
+  const gw=$("#pdGuides");
+  if(gw){ (M.guides||[]).forEach((g,i)=>{ const b=document.createElement("button");
+    b.className="btn"; b.textContent=g.title;
+    b.onclick=()=>{ $("#pdGuideBody").innerHTML=`<div class="card"><div class="card-h">${esc(g.title)}</div><div class="md">${md(g.body)}</div></div>`; };
+    gw.appendChild(b);
+    if(i===0) b.onclick(); }); }
   renderCvideos();
   const sv=document.createElement("div"); sv.innerHTML=`<div class="row" style="margin-top:8px"><input id="pdYt" placeholder="Save a YouTube link or ID…" inputmode="url"><button class="btn" id="pdYtAdd" style="flex:none">Save</button></div><div class="row wrap" id="pdMine"></div>`;
   vw.after(sv);

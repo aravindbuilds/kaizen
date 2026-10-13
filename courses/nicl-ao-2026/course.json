@@ -9,5 +9,5 @@
     { "id": "prelims", "title": "Prelims", "desc": "English 30 • Reasoning 35 • Quant 35 • 60 min" },
     { "id": "mains", "title": "Mains", "desc": "GA • Computer Knowledge • Technical IT • Descriptive" }
   ],
-  "files": { "decks": "decks.json", "quizzes": "quizzes.json", "videos": "videos.json", "plan": "plan.md", "resources": "resources.md" }
+  "files": { "decks": "decks.json", "quizzes": "quizzes.json", "videos": "videos.json", "guides": "guides.json", "plan": "plan.md", "resources": "resources.md" }
 }

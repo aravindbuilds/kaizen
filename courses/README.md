@@ -12,6 +12,7 @@ webapp/courses/
 │   ├── decks.json          ← flashcard/quiz bank (required)
 │   ├── quizzes.json        ← mock sets drawn from the bank
 │   ├── videos.json         ← library entries
+│   ├── guides.json         ← study-note guides (tricks, playbooks) rendered in Paths
 │   ├── plan.md             ← phased plan (rendered in Paths)
 │   └── resources.md        ← papers, mocks, links (rendered in Paths)
 └── _template/              ← copy this to start a new course
@@ -20,7 +21,7 @@ webapp/courses/
 ## 2. Add a course (4 steps)
 
 1. **Copy** `courses/_template/` → `courses/gate-2027/`.
-2. **Fill the data**: `course.json` (title, exam date, tracks), `decks.json` (cards — same shape as template), `quizzes.json` (pick questions from decks), `videos.json` (search terms or IDs), `plan.md`, `resources.md`.
+2. **Fill the data**: `course.json` (title, exam date, tracks), `decks.json` (cards — same shape as template), `quizzes.json` (pick questions from decks), `videos.json` (search terms or IDs), `guides.json` (method notes: `{id, title, track, body}` in Markdown), `plan.md`, `resources.md`.
 3. **Register**: add `{ "id": "gate-2027", "path": "courses/gate-2027/course.json" }` to `courses.json`.
 4. **Deploy** (git push; Vercel rebuilds). The course appears under Paths; enrol and practise.
 
@@ -38,7 +39,7 @@ webapp/courses/
 
 - Filenames inside a pack are fixed (`decks.json`, …) but the pack folder name is free.
 - Anything starting with `_` is ignored (so `_template` never ships as a course).
-- Missing optional files (`plan.md`, `resources.md`, `videos.json`) simply hide that section — `decks.json` is the only required file.
+- Missing optional files (`plan.md`, `resources.md`, `videos.json`, `guides.json`) simply hide that section — `decks.json` is the only required file.
 - Progress is namespaced per course (`courseId:deckId`), so streaks/XP stay global while mastery stays per course. Duo sync carries all courses automatically.
 
 ## 5. Authoring from existing study material
