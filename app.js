@@ -1,6 +1,6 @@
 /* Kaizen — social progression platform.
    Home · Paths · Focus · Social · Profile. Offline-first; Firebase duo sync optional. */
-const APP_V = "2.3";
+const APP_V = "2.5";
 window.__kzStep = "load";
 window.addEventListener("error", e => {
   const t = document.querySelector("#errToast");
@@ -284,6 +284,9 @@ function showFlash(){ const list=items(); if(!list.length) return; const c=list[
 function beginWork(kind,id){ prKind=kind; prId=id; order=shuffle(items().map((_,i)=>i)); qi=0; showQ(); }
 /* flashCard/knew/miss are bound per session inside buildWork→rebindWork (elements only exist then) */
 
+/* mobile nav must not depend on media queries alone (some webviews misreport them) */
+function fitNav(){ try{ document.body.classList.toggle("mobile",(window.innerWidth||0)<=640); }catch{} }
+window.addEventListener("resize",fitNav); window.addEventListener("orientationchange",()=>setTimeout(fitNav,300));
 /* ---------- tabs ---------- */
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); t.classList.add("active");
@@ -677,15 +680,28 @@ function renderProfile(){
   for(let i=6;i>=0;i--){ const hit=rangeDays(1).length&&Object.values(S.courses).some(cc=>((cc.days||{})[dayKey(i)]||{answers:0}).answers>0);
     const el=document.createElement("div"); el.className="sday"+(hit?" hit":"")+(i===0?" today":"");
     el.innerHTML=`<div class="dot">✓</div><span>${"SMTWTFS"[new Date(dayKey(i)+"T12:00").getDay()]}</span>`; wd.appendChild(el); }
-  const hc=$("#hourChart"); hc.innerHTML="";
-  const hsum=new Array(24).fill(0);
-  Object.values(S.courses).forEach(cc=>Object.values(cc.days||{}).slice(-7).forEach(d=>(d.h||[]).forEach((v,i)=>hsum[i]+=v)));
-  const days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], per={}; days.forEach(d=>per[d]=0);
-  for(let i=0;i<7;i++){ const dt=dayKey(i);
-    Object.values(S.courses).forEach(cc=>{ const d=(cc.days||{})[dt]; if(d) per[days[new Date(dt+"T12:00").getDay()]]+=(d.secs||0)/60; }); }
-  const mx=Math.max(30,...Object.values(per));
-  ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(nm=>{ const el=document.createElement("div"); el.className="hcol";
-    el.innerHTML=`<b>${Math.round(per[nm])}m</b><div class="hbar" style="height:${8+112*per[nm]/mx}px"></div><span>${nm}</span>`; hc.appendChild(el); });
+  const dayData=rangeDays(7).map(dt=>{
+    let mins=0, answers=0;
+    Object.values(S.courses).forEach(cc=>{ const d=(cc.days||{})[dt]; if(d){ mins+=(d.secs||0)/60; answers+=d.answers||0; } });
+    const date=new Date(dt+"T12:00");
+    return {dt, mins, answers, label:date.toLocaleDateString(undefined,{weekday:"short"}).slice(0,2)};
+  });
+  const renderChart=(id, values, suffix, noteId, note)=>{
+    const el=$(id); if(!el) return;
+    el.innerHTML="";
+    const mx=Math.max(1,...values);
+    dayData.forEach((d,i)=>{
+      const col=document.createElement("div"); col.className="hcol"+(i===dayData.length-1?" today":"");
+      const value=Math.round(values[i]);
+      col.innerHTML=`<b>${value}${suffix}</b><div class="hbar" style="height:${Math.max(6,8+112*values[i]/mx)}px"></div><span>${d.label}</span>`;
+      el.appendChild(col);
+    });
+    const n=$(noteId); if(n) n.textContent=note;
+  };
+  const mins=dayData.map(d=>d.mins), answers=dayData.map(d=>d.answers);
+  const totalMins=Math.round(mins.reduce((a,b)=>a+b,0)), totalAnswers=answers.reduce((a,b)=>a+b,0);
+  renderChart("#hourChart",mins,"m","#timeChartNote",`${totalMins}m total · ${Math.round(totalMins/7)}m daily average`);
+  renderChart("#answerChart",answers,"","#answerChartNote",`${totalAnswers} total · ${Math.max(...answers)} on your best day`);
   const pp=$("#profPaths"); pp.innerHTML="";
   S.enrolled.filter(id=>COURSES[id]).forEach(cid=>{ const st=pathStats(cid);
     const el=document.createElement("div"); el.className="course";
@@ -920,6 +936,7 @@ function renderAll(){ renderTop(); renderHome(); }
   refreshAuthUI();
   touchDay();   store.save(LS_MAIN,S);
   normState();
+  fitNav();
   const av = document.querySelector("#appVer"); if (av) av.textContent = "v" + APP_V;
   renderAll(); renderPaths();
   const A=active();

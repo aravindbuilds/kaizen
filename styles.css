@@ -2,7 +2,7 @@
 :root{
   --bg:#14120f; --card:#1d1a16; --line:#2e2a23; --ink:#ece7db; --mut:#a39a89;
   --acc:#5fb894; --acc-soft:#1e2f28; --good:#5fb894; --good-bg:#16241e;
-  --amber:#c99a4b; --amber-bg:#2a2114; --bad:#d97a6a; --r:14px;
+  --amber:#c99a4b; --amber-bg:#2a2114; --bad:#d97a6a; --r:16px;
   color-scheme:dark;
 }
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
@@ -17,29 +17,29 @@ img,svg,iframe,pre,table{max-width:100%}
 body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   background:radial-gradient(900px 480px at 50% -8%,#1e2a22 0%,var(--bg) 60%) fixed,var(--bg);
   color:var(--ink); min-height:100vh; font-size:16px; line-height:1.6}
-#app{max-width:720px; margin:0 auto; padding:14px 16px 110px}
-h1{font-size:1.45em; margin:.15em 0 .3em; letter-spacing:-.02em}
-h2{font-size:1.05em; margin:1.3em 0 .4em}
+#app{max-width:760px; margin:0 auto; padding:18px 18px 110px}
+h1{font-size:1.55em; margin:.15em 0 .3em; letter-spacing:-.03em}
+h2{font-size:1.05em; margin:1.7em 0 .55em; letter-spacing:-.01em}
 .kicker{font-size:.72em; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin:1.2em 0 0; font-weight:600}
 .lede{color:var(--mut); margin:.2em 0 1em}
-.card{background:linear-gradient(180deg,#1e1b17,#191611); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin:12px 0}
+.card{background:linear-gradient(180deg,#211e19,#191611); border:1px solid var(--line); border-radius:var(--r); padding:17px 18px; margin:12px 0; box-shadow:0 8px 24px rgba(0,0,0,.12)}
 .card-h{display:flex; justify-content:space-between; align-items:baseline; font-weight:700; font-size:.93em; margin-bottom:6px; gap:8px}
 .muted{color:var(--mut)} .tiny{font-size:.8em} .center{text-align:center}
 a{color:var(--acc)}
-.topbar{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px 2px 2px}
+.topbar{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:8px 2px 4px; position:relative}
 .brand{font-size:1.25em; font-weight:800; letter-spacing:-.02em}
 .tagline{display:block; font-size:.6em; font-weight:400; color:var(--mut)}
 .top-stats{display:flex; gap:8px; font-size:.85em}
-.stat{background:var(--card); border:1px solid var(--line); padding:6px 14px; border-radius:99px; font-variant-numeric:tabular-nums}
+.stat{background:rgba(29,26,22,.72); border:1px solid var(--line); padding:6px 14px; border-radius:99px; font-variant-numeric:tabular-nums; box-shadow:0 4px 14px rgba(0,0,0,.12)}
 .stat span{color:var(--mut); font-size:.85em}
 /* nav: top on desktop, bottom bar on mobile */
-.tabs{display:flex; gap:4px; margin:12px 0 4px; position:-webkit-sticky; position:sticky; top:0; z-index:20; background:rgba(20,18,15,.94); padding:8px 0}
+.tabs{display:flex; gap:4px; margin:12px 0 4px; position:-webkit-sticky; position:sticky; top:0; z-index:20; background:rgba(20,18,15,.86); backdrop-filter:blur(16px); padding:8px 0}
 .tab{flex:1; padding:9px 4px; border-radius:10px; border:1px solid transparent; background:transparent; color:var(--mut); font-size:.9em; font-weight:600; position:relative}
-.tab.active{background:#ece7db; color:#14120f}
+.tab.active{background:#ece7db; color:#14120f; box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .dot-badge{position:absolute; top:4px; right:8px; min-width:18px; height:18px; border-radius:99px; background:var(--bad); color:#fff; font-size:.7em; display:flex; align-items:center; justify-content:center; padding:0 5px}
 .panel{display:none} .panel.active{display:block}
 /* home */
-.today-card{border-color:#3a352c}
+.today-card{border-color:#3a352c; background:linear-gradient(135deg,#24231d,#191611); box-shadow:0 12px 30px rgba(0,0,0,.2)}
 .today-nums{display:flex; gap:28px; margin:8px 0}
 .today-nums b{font-size:1.7em; font-variant-numeric:tabular-nums; display:block}
 .today-nums span{color:var(--mut); font-size:.85em}
@@ -94,10 +94,14 @@ a{color:var(--acc)}
 .opt.correct{border-color:var(--good); background:rgba(95,184,148,.1); font-weight:600}
 .opt.wrong{border-color:var(--bad); background:rgba(217,122,106,.1)}
 .explain{margin:12px 0; padding:10px 14px; border-left:2px solid var(--acc); background:#0d0c0a; border-radius:0 8px 8px 0; font-size:.92em}
-.btn{padding:12px 18px; border-radius:10px; border:1px solid var(--line); background:var(--card); color:var(--ink); font-size:1em; font-weight:600; cursor:pointer}
-.btn.primary{background:#ece7db; border-color:#ece7db; color:#14120f}
+.btn{padding:12px 18px; border-radius:11px; border:1px solid var(--line); background:var(--card); color:var(--ink); font-size:1em; font-weight:650; cursor:pointer; transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.btn:hover{border-color:#665f50; transform:translateY(-1px)}
+.btn.primary{background:#ece7db; border-color:#ece7db; color:#14120f; box-shadow:0 6px 16px rgba(0,0,0,.16)}
 .btn:disabled{opacity:.5} .btn.danger{color:var(--bad)}
 .row{display:flex; gap:8px; margin:8px 0} .row .btn{flex:1} .wrap{flex-wrap:wrap}
+#focusLanding #focusActs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+#focusLanding #focusActs .btn{min-height:58px; padding:10px 8px}
+#focusPick{border-color:#3a352c}
 .hidden{display:none!important}
 .flash{perspective:800px; margin:10px 0}
 .flash-inner{position:relative; min-height:170px; transform-style:preserve-3d; transition:transform .35s}
@@ -135,10 +139,16 @@ input{flex:1} select{flex:1}
 .dot{width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:#0d0c0a; border:1px solid var(--line); color:transparent; font-size:.78em; font-weight:800}
 .sday.hit .dot{background:var(--acc-soft); border-color:var(--acc); color:var(--acc)}
 .sday.today .dot{outline:2px solid var(--acc); outline-offset:2px}
-.hchart{display:flex; align-items:flex-end; gap:8px; height:120px}
+.progress-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:2px}
+.chart-card{margin-top:0}
+.chart-card .card-h{margin-bottom:14px}
+.hchart{display:flex; align-items:flex-end; gap:8px; height:142px; padding:0 2px}
 .hcol{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; height:100%; justify-content:flex-end}
-.hbar{width:70%; max-width:24px; border-radius:5px 5px 2px 2px; background:var(--acc); min-height:4px}
-.hcol span{font-size:.66em; color:var(--mut)} .hcol b{font-size:.66em; font-variant-numeric:tabular-nums}
+.hbar{width:70%; max-width:30px; border-radius:7px 7px 3px 3px; background:linear-gradient(180deg,var(--acc),#397e66); min-height:4px; transition:height .35s ease}
+.answers-chart .hbar{background:linear-gradient(180deg,var(--amber),#8f682e)}
+.hcol span{font-size:.66em; color:var(--mut)} .hcol b{font-size:.66em; font-variant-numeric:tabular-nums; min-height:1.2em}
+.hcol.today span{color:var(--ink); font-weight:700}
+.chart-note{margin-top:10px; min-height:1.2em}
 .week{display:flex; gap:6px; align-items:flex-end; height:96px}
 .wday{flex:1; text-align:center; font-size:.68em; color:var(--mut)}
 .wday i{display:block; border-radius:5px 5px 0 0; background:var(--acc); min-height:4px}
@@ -153,15 +163,62 @@ input{flex:1} select{flex:1}
 .quest .pbar i{display:block; height:100%; background:var(--good)}
 #myVids .btn{flex:1 1 40%; font-size:.85em}
 #vidBtns .btn{flex:1 1 30%}
-.foot{text-align:center; margin:24px 0 8px; font-size:.8em}
+.foot{text-align:center; margin:36px 0 8px; font-size:.76em; opacity:.72}
+body.mobile #app{padding-bottom:110px}
+body.mobile .tabs{position:fixed; bottom:0; left:0; right:0; z-index:30; background:rgba(20,18,15,.97);
+  top:auto; width:auto; height:auto; border-top:1px solid var(--line); margin:0;
+  padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+body.mobile .tab{font-size:.8em; padding:10px 2px}
+body.mobile .topbar{padding-top:4px}
+body.mobile .topbar{flex-wrap:nowrap; align-items:center; gap:6px}
+body.mobile .brand{font-size:1em; white-space:nowrap}
+body.mobile .tagline{display:none}
+body.mobile .top-stats{margin-left:auto; gap:6px; font-size:.78em; flex-wrap:nowrap}
+body.mobile .stat{padding:4px 9px; white-space:nowrap}
+body.mobile .stat span{font-size:.7em}
 @media(min-width:641px){ .video-frame iframe{height:360px} }
+.levelup{position:fixed; left:50%; bottom:calc(96px + env(safe-area-inset-bottom)); transform:translateX(-50%);
+  background:var(--ink); color:#14120f; padding:12px 22px; border-radius:12px; font-size:.95em; z-index:60;
+  box-shadow:0 12px 32px rgba(0,0,0,.5); white-space:nowrap}
 #errToast{position:fixed; top:10px; left:50%; transform:translateX(-50%); z-index:100;
   background:#3a1410; color:#ffd9d2; border:1px solid var(--bad); border-radius:10px;
   padding:10px 16px; font-size:.85em; max-width:92vw}
+body{overflow-x:clip}
+.strip,.feed{scrollbar-width:thin}
 pre{background:#0d0c0a; border:1px solid var(--line); border-radius:10px; padding:12px; overflow-x:auto; font-size:.78em}
 @media(max-width:640px){
   .tabs{position:fixed; bottom:0; left:0; right:0; z-index:30; background:rgba(20,18,15,.97);
-    border-top:1px solid var(--line); margin:0; padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+    top:auto; width:auto; height:auto; border-top:1px solid var(--line); margin:0;
+    padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
   .tab{font-size:.8em; padding:10px 2px}
-  .topbar{padding-top:4px}
+  .topbar{padding-top:4px; flex-wrap:nowrap; align-items:center; gap:6px}
+  .brand{font-size:1em; white-space:nowrap}
+  .tagline{display:none}
+  .top-stats{margin-left:auto; gap:6px; font-size:.78em; flex-wrap:nowrap}
+  .stat{padding:4px 9px; white-space:nowrap}
+  .stat span{font-size:.68em}
+  #app{padding-left:12px; padding-right:12px}
+  .card{padding:14px}
+  .today-nums{gap:20px}
+  .row{align-items:stretch}
+  .row .btn{min-height:46px}
+  .duo-grid{grid-template-columns:1fr}
+  .cv{align-items:flex-start}
+  .cv img{width:96px; height:54px}
+  .prof-head{align-items:flex-start}
+  .prof-head h1{margin-top:0}
+  .seg{gap:5px}
+  .seg{overflow-x:auto; flex-wrap:nowrap; padding-bottom:2px; scrollbar-width:none}
+  .seg::-webkit-scrollbar{display:none}
+  .seg-btn{font-size:.8em; padding-left:12px; padding-right:12px; flex:0 0 auto; min-width:82px}
+  #focusLanding #focusActs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #focusLanding #focusActs .btn{min-height:54px}
+  #tab-profile .prof-head{padding:12px 4px 8px; margin-bottom:6px}
+  #tab-profile .avatar{width:68px; height:68px; box-shadow:0 0 0 6px rgba(95,184,148,.08)}
+  #tab-profile .prof-head h1{font-size:1.5em}
+  #tab-profile .me-grid{gap:8px}
+  #tab-profile .me-grid .card{padding:14px 12px}
+  #tab-profile .big{font-size:1.4em}
+  .progress-grid{grid-template-columns:1fr}
+  .hchart{height:128px}
 }

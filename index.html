@@ -180,7 +180,18 @@
       <div id="courseBars"></div>
       <h2>Activity</h2>
       <div class="card"><div id="weekDots" class="streak-row"></div></div>
-      <div class="card"><div class="card-h">Study hours</div><div id="hourChart" class="hchart"></div></div>
+      <div class="progress-grid">
+        <div class="card chart-card">
+          <div class="card-h"><span>Learning time</span><span class="muted tiny">Last 7 days</span></div>
+          <div id="hourChart" class="hchart" role="img" aria-label="Learning time over the last 7 days"></div>
+          <div class="chart-note muted tiny" id="timeChartNote"></div>
+        </div>
+        <div class="card chart-card">
+          <div class="card-h"><span>Questions answered</span><span class="muted tiny">Last 7 days</span></div>
+          <div id="answerChart" class="hchart answers-chart" role="img" aria-label="Questions answered over the last 7 days"></div>
+          <div class="chart-note muted tiny" id="answerChartNote"></div>
+        </div>
+      </div>
       <h2>Your paths</h2>
       <div id="profPaths"></div>
       <h2>Achievements</h2>
@@ -235,6 +246,7 @@
 
   <footer class="foot muted">Kaizen — a little better, every day. <span id="appVer"></span></footer>
 </div>
+<div id="levelUp" class="levelup hidden">Level <b id="newLvl"></b> — keep going.</div>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
